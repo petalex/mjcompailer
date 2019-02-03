@@ -1,0 +1,31 @@
+INFO  22:36:21,200 - Compiling source file: C:\Users\dp150101d\Documents\Fakultet\VII semestar\PP1\Projekat\pp1\workspace\MJCompiler\test\recovery.mj
+INFO  22:36:21,207 - Parsing started
+ERROR 22:36:21,267 - [Parser] Syntax error (line: 5)
+ERROR 22:36:21,267 - Error recovery: Global var
+INFO  22:36:21,269 - Parsing successful!
+INFO  22:36:21,270 - Program(
+  Declarations(
+    NoDeclarations(
+    ) [NoDeclarations]
+    VarDeclaration(
+      VarDeclDefinition(
+        TypeName(
+        ) [TypeName]
+        VarIdentifiers(
+          VarIdentifiers(
+            FirstVarIdentifier(
+              VarIdentifier(
+              ) [VarIdentifier]
+            ) [FirstVarIdentifier]
+            GlobalVarError(
+            ) [GlobalVarError]
+          ) [VarIdentifiers]
+          VarIdentifier(
+          ) [VarIdentifier]
+        ) [VarIdentifiers]
+      ) [VarDeclDefinition]
+    ) [VarDeclaration]
+  ) [Declarations]
+  NoMethodDeclarations(
+  ) [NoMethodDeclarations]
+) [Program]

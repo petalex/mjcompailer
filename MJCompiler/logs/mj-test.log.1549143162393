@@ -1,0 +1,25 @@
+INFO  16:11:14,732 - Compiling source file: C:\Users\dp150101d\Documents\Fakultet\VII semestar\PP1\Projekat\pp1\workspace\MJCompiler\test\recovery.mj
+INFO  16:11:14,741 - Parsing started
+ERROR 16:11:14,809 - [Parser] Syntax error (line: 3)
+ERROR 16:11:14,810 - Error recovery: Global var -> ; (line: 3)
+ERROR 16:11:14,811 - [Parser] Syntax error (line: 4)
+ERROR 16:11:14,811 - Error recovery: Global var -> ; (line: 4)
+INFO  16:11:14,814 - Parsing successful!
+INFO  16:11:14,814 - Program(
+  Declarations(
+    Declarations(
+      NoDeclarations(
+      ) [NoDeclarations]
+      VarDeclaration(
+        GlobalVarSemicolonError(
+        ) [GlobalVarSemicolonError]
+      ) [VarDeclaration]
+    ) [Declarations]
+    VarDeclaration(
+      GlobalVarSemicolonError(
+      ) [GlobalVarSemicolonError]
+    ) [VarDeclaration]
+  ) [Declarations]
+  NoMethodDeclarations(
+  ) [NoMethodDeclarations]
+) [Program]

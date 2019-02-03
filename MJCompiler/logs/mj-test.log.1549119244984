@@ -1,0 +1,3 @@
+INFO  15:47:44,186 - Compiling source file: C:\Users\dp150101d\Documents\Fakultet\VII semestar\PP1\Projekat\pp1\workspace\MJCompiler\test\recovery.mj
+INFO  15:47:44,195 - Parsing started
+ERROR 15:47:44,284 - [Parser] Syntax error (line: 3)

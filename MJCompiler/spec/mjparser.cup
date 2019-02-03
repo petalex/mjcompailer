@@ -1,0 +1,251 @@
+
+package rs.ac.bg.etf.pp1;
+
+import java_cup.runtime.*;
+import org.apache.log4j.*;
+import rs.ac.bg.etf.pp1.ast.*;
+
+parser code {:
+	Logger log = Logger.getLogger(getClass());
+   
+    public void report_fatal_error(String message, Object info) throws java.lang.Exception {
+      done_parsing();
+      report_error(message, info);
+    }
+  
+    public void syntax_error(Symbol cur_token) {
+        report_error("[Parser] Syntax error ", cur_token);
+    }
+  
+    public void unrecovered_syntax_error(Symbol cur_token) throws java.lang.Exception {
+        report_fatal_error("[Parser] Fatal error ", cur_token);
+    }
+
+    public void report_error(String message, Object info) {
+    	StringBuilder msg = new StringBuilder(message); 
+    	if (info instanceof Symbol)
+            msg.append ("(line: ").append(((Symbol)info).left).append(")");
+        log.error(msg.toString());
+    }
+:}
+
+scan with {:
+	Symbol s = this.getScanner().next_token();
+	if (s != null && s.value != null) {
+		log.info("[Lexer] Token found (" + s.toString() + ", " + s.value.toString() + ")");
+	}
+	return s;
+:}
+
+
+terminal PROGRAM, BREAK, CLASS, INTERFACE, ENUM, ELSE, CONST, IF, NEW, PRINT, READ, RETURN, VOID, FOR, EXTENDS, IMPLEMENTS, CONTINUE;
+terminal IDENT, CHAR, BOOL;
+terminal Integer NUM;
+terminal ADD, SUB, MUL, DIV, MOD, EQU, NEQ, GRT, GTE, LST, LTE, AND, OR;
+terminal ASSIGN, INC, DEC, SEMICOLON, COMMA, PERIOD, LPARENT, RPARENT, LSQUARE, RSQUARE, LCURLY, RCURLY;
+
+nonterminal Program, DeclList, MethodDeclList, Decl, ConstDecl, VarDecl, ClassDecl, EnumDecl, InterfaceDecl;
+nonterminal ConstIdentList, ConstIdent, Type, EnumIdentList, EnumIdent, VarIdentList, VarIdent;
+nonterminal Extends, Implements, TypeList, VarDeclList, ClassMethodDeclList, MethodDecl, InterfaceMethodDeclList;
+nonterminal InterfaceMethodDecl, FormParams, FormParamList, FormParam, StatementList, Statement, DesignatorStmt;
+nonterminal Condition, ForDesignatorStmt, ForCond, Expression, Designator, PrintNumConstList, ActualParams;
+nonterminal ExpressionList, CondTerm, CondFact, AssignOp, RelOp, AddOp, Term, MulOp, Factor;
+
+precedence left ELSE;
+
+Program ::= (Program) PROGRAM IDENT DeclList LCURLY MethodDeclList RCURLY;
+
+DeclList ::= (Declarations) DeclList Decl |
+			 (NoDeclarations) /* Epsilon */
+			 ;
+
+Decl ::= (ConstDeclaration) ConstDecl | 
+		 (VarDeclaration) VarDecl | 
+		 (ClassDeclaration) ClassDecl | 
+		 (EnumDeclaration) EnumDecl | 
+		 (InterfaceDeclaration) InterfaceDecl
+		 ;
+
+ConstDecl ::= (ConstDeclDefinition) CONST Type ConstIdentList SEMICOLON;
+
+ConstIdentList ::= (ConstIdentifiers) ConstIdentList COMMA ConstIdent |
+				   (FirstConstIdentifier) ConstIdent
+				   ;
+
+ConstIdent ::= (NumConstIdentifier) IDENT ASSIGN NUM |
+			   (CharConstIdentifier) IDENT ASSIGN CHAR |
+			   (BoolConstIdentifier) IDENT ASSIGN BOOL
+			   ;
+			  
+EnumDecl ::= (EnumDeclDefinition) ENUM IDENT LCURLY EnumIdentList RCURLY;
+
+EnumIdentList ::= (EnumIdentifiers) EnumIdentList COMMA EnumIdent |
+				  (FirstEnumIdentifier) EnumIdent
+				  ;
+
+EnumIdent ::= (NumEnumIdentifier) IDENT ASSIGN NUM |
+			  (EnumIdentifier) IDENT
+			  ;
+
+VarDecl ::= (VarDeclDefinition) Type VarIdentList SEMICOLON;
+
+VarIdentList ::= (VarIdentifiers) VarIdentList COMMA VarIdent |
+				 (FirstVarIdentifier) VarIdent
+				 ;
+
+VarIdent ::= (ArrayVarIdentifier) IDENT LSQUARE RSQUARE |
+			 (VarIdentifier) IDENT |
+			 (GlobalVarError) error
+			 {: parser.report_error("Error recovery: Global var", null); :}
+			 ;
+
+ClassDecl ::= (ClassDeclDefinition) CLASS IDENT Extends Implements LCURLY VarDeclList ClassMethodDeclList RCURLY;
+
+Extends ::= (ExtendsClass) EXTENDS Type |
+			(NoExtendsClass) /* Epsilon */
+			;
+
+Implements ::= (ImplementsInterfaces) IMPLEMENTS TypeList |
+			   (NoImplementsInterfaces) /* Epsilon */
+			   ;
+			   
+TypeList ::= (Types) TypeList COMMA Type |
+			 (FirstType) Type
+			 ;
+
+VarDeclList ::= (VarDeclarations) VarDeclList VarDecl |
+			 (NoVarDeclarations) /* Epsilon */
+			 ;
+			 
+ClassMethodDeclList ::= (ClassMethodDeclarations) LCURLY MethodDeclList  RCURLY |
+			 			(NoClassMethodDeclarations) /* Epsilon */
+			 			;
+
+InterfaceDecl ::= (InterfaceDeclDefinition) INTERFACE IDENT LCURLY InterfaceMethodDeclList RCURLY;
+
+InterfaceMethodDeclList ::= (InterfaceMethodDeclarations) InterfaceMethodDeclList InterfaceMethodDecl |
+						    (NoInterfaceMethodDeclarations) /* Epsilon */
+					 	    ;
+
+InterfaceMethodDecl ::= (TypeInterfaceMethodDeclaration) Type IDENT LPARENT FormParams RPARENT SEMICOLON |
+						(VoidInterfaceMethodDeclaration) VOID IDENT LPARENT FormParams RPARENT SEMICOLON
+						;
+
+MethodDeclList ::= (MethodDeclarations) MethodDeclList MethodDecl |
+				   (NoMethodDeclarations) /* Epsilon */
+			 	   ;
+
+MethodDecl ::= (TypeMethodDeclaration) Type IDENT LPARENT FormParams RPARENT VarDeclList LCURLY StatementList RCURLY |
+			   (VoidMethodDeclaration) VOID IDENT LPARENT FormParams RPARENT VarDeclList LCURLY StatementList RCURLY
+			   ;
+
+FormParams ::= (MethodFormalParameters) FormParamList |
+			   (NoMethodFormalParameters) /* Epsilon */
+			   ;
+
+FormParamList ::= (FormalParameters) FormParamList COMMA FormParam |
+				  (FirstFormalParameter) FormParam
+			   	  ;
+
+FormParam ::= (ArrayFormalParameter) Type IDENT LSQUARE RSQUARE |
+			  (FormalParameter) Type IDENT
+			  ;
+
+Type ::= (TypeName) IDENT;
+
+StatementList ::= (Statements) StatementList Statement |
+				  (NoStatements) /* Epsilon */
+			   	  ;
+
+Statement ::= (DesignatorStatement) DesignatorStmt SEMICOLON |
+			  (IfStatement) IF LPARENT Condition RPARENT Statement |
+			  (IfElseStatement) IF LPARENT Condition RPARENT Statement ELSE Statement |
+			  (ForStatement) FOR LPARENT ForDesignatorStmt SEMICOLON ForCond SEMICOLON ForDesignatorStmt RPARENT Statement |
+			  (BreakStatement) BREAK SEMICOLON |
+			  (ContinueStatement) CONTINUE SEMICOLON |
+			  (TypeReturnStatement) RETURN Expression SEMICOLON |
+			  (VoidReturnStatement) RETURN SEMICOLON |
+			  (ReadStatement) READ LPARENT Designator RPARENT SEMICOLON |
+			  (PrintStatement) PRINT LPARENT Expression PrintNumConstList RPARENT SEMICOLON |
+			  (BlockStatement) LCURLY StatementList RCURLY
+			  ;
+
+DesignatorStmt ::= (AssignDesignatorStatement) Designator AssignOp Expression |
+				   (FunctionDesignatorStatement) Designator LPARENT ActualParams RPARENT |
+				   (IncDesignatorStatement) Designator INC |
+				   (DecDesignatorStatement) Designator DEC
+				   ;
+						
+ActualParams ::= (ActualParameters) ExpressionList |
+			   	 (NoActualParameters) /* Epsilon */
+			   	 ;
+			   	 
+ExpressionList ::= (Expressions) ExpressionList COMMA Expression |
+				   (FirstExpression) Expression
+				   ;
+
+Condition ::= (ConditionTerms) Condition OR CondTerm |
+			  (FirstConditionTerm) CondTerm
+			  ;
+			
+CondTerm ::= (ConditionFacts) CondTerm AND CondFact |
+			 (FirstConditionFact) CondFact
+			 ;
+			 
+CondFact ::= (ConditionExpressions) CondFact RelOp Expression |
+			 (FirstConditionExpression) Expression
+			 ;
+
+ForDesignatorStmt ::= (ForDesignatorStatement) DesignatorStmt |
+					  (NoForDesignatorStatement) /* Epsilon */
+			   	 	  ;
+
+ForCond ::= (ForCondition) Condition |
+			(NoForCondition) /* Epsilon */
+			;
+
+Expression ::= (Terms) Expression AddOp Term |
+			   (NegFirstTerm) SUB Term |
+			   (FirstTerm) Term
+			   ;
+			   
+Term ::= (Factors) Term MulOp Factor |
+		 (FirstFactor) Factor
+		 ;
+		 
+Factor ::= (FunctionFactor) Designator LPARENT ActualParams RPARENT |
+		   (DesignatorFactor) Designator |
+		   (NumFactor) NUM |
+		   (CharFactor) CHAR |
+		   (BoolFactor) BOOL |
+		   (NewArrayFactor) NEW Type LSQUARE Expression RSQUARE |
+		   (NewFactor) NEW Type |
+		   (ExpressionFactor) LPARENT Expression RPARENT
+		   ;
+
+Designator ::= (FieldDesignator) Designator PERIOD IDENT |
+			   (ArrayDesignator) Designator LSQUARE Expression RSQUARE |
+			   (SimpleDesignator) IDENT
+			   ;
+
+AssignOp ::= (Assign) ASSIGN;
+
+RelOp ::= (Equal) EQU | 
+		  (NotEqual) NEQ | 
+		  (GreaterThan) GRT | 
+		  (GreaterThanEqual) GTE | 
+		  (LessThan) LST | 
+		  (LessThanEqual) LTE
+		  ;
+
+AddOp ::= (Addition) ADD | 
+		  (Subtraction) SUB;
+
+MulOp ::= (Multiplication) MUL | 
+		  (Division) DIV | 
+		  (Modulus) MOD
+		  ;
+
+PrintNumConstList ::= (PrintNumConsts) PrintNumConstList COMMA NUM |
+					  (NoPrintNumConsts) /* Epsilon */
+			   	  	  ;

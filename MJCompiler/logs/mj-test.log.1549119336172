@@ -1,0 +1,12 @@
+INFO  15:54:04,994 - Compiling source file: C:\Users\dp150101d\Documents\Fakultet\VII semestar\PP1\Projekat\pp1\workspace\MJCompiler\test\recovery.mj
+INFO  15:54:05,003 - Parsing started
+INFO  15:54:05,078 - [Lexer] Token found (#2, program)
+INFO  15:54:05,078 - [Lexer] Token found (#19, P)
+INFO  15:54:05,078 - [Lexer] Token found (#19, int)
+INFO  15:54:05,079 - [Lexer] Token found (#19, val)
+INFO  15:54:05,080 - [Lexer] Token found (#19, x)
+ERROR 15:54:05,081 - [Parser] Syntax error (line: 3)
+INFO  15:54:05,081 - [Lexer] Token found (#40, ,)
+INFO  15:54:05,081 - [Lexer] Token found (#19, y)
+INFO  15:54:05,081 - [Lexer] Token found (#39, ;)
+INFO  15:54:05,082 - [Lexer] Token found (#19, char)

@@ -1,0 +1,91 @@
+INFO  07:50:46,747 - Compiling source file: C:\Users\dp150101d\Documents\Fakultet\VII semestar\PP1\Projekat\pp1\workspace\MJCompiler\test\recovery.mj
+INFO  07:50:46,754 - Parsing started
+INFO  07:50:46,843 - [Lexer] Token found (#2, program)
+INFO  07:50:46,843 - [Lexer] Token found (#19, P)
+INFO  07:50:46,843 - [Lexer] Token found (#19, int)
+INFO  07:50:46,844 - [Lexer] Token found (#19, val)
+INFO  07:50:46,845 - [Lexer] Token found (#19, x)
+INFO  07:50:46,847 - [Lexer] Token found (#40, ,)
+ERROR 07:50:46,847 - [Parser] Syntax error (line: 3)
+INFO  07:50:46,847 - [Lexer] Token found (#19, y)
+INFO  07:50:46,847 - [Lexer] Token found (#39, ;)
+INFO  07:50:46,848 - [Lexer] Token found (#19, char)
+ERROR 07:50:46,848 - Error recovery: Global var
+INFO  07:50:46,850 - [Lexer] Token found (#19, x)
+INFO  07:50:46,850 - [Lexer] Token found (#19, y)
+INFO  07:50:46,850 - [Lexer] Token found (#19, z)
+INFO  07:50:46,850 - [Lexer] Token found (#19, w)
+INFO  07:50:46,850 - [Lexer] Token found (#39, ;)
+ERROR 07:50:46,851 - [Parser] Syntax error (line: 4)
+INFO  07:50:46,851 - [Lexer] Token found (#46, {)
+INFO  07:50:46,851 - [Lexer] Token found (#47, })
+ERROR 07:50:46,852 - Error recovery: Global var
+INFO  07:50:46,856 - Parsing successful!
+INFO  07:50:46,857 - Program(
+  Declarations(
+    Declarations(
+      Declarations(
+        Declarations(
+          Declarations(
+            NoDeclarations(
+            ) [NoDeclarations]
+            VarDeclaration(
+              VarDeclDefinition(
+                TypeName(
+                ) [TypeName]
+                FirstVarIdentifier(
+                  VarIdentifier(
+                  ) [VarIdentifier]
+                ) [FirstVarIdentifier]
+              ) [VarDeclDefinition]
+            ) [VarDeclaration]
+          ) [Declarations]
+          VarDeclaration(
+            VarDeclDefinition(
+              TypeName(
+              ) [TypeName]
+              VarIdentifiers(
+                FirstVarIdentifier(
+                  GlobalVarError(
+                  ) [GlobalVarError]
+                ) [FirstVarIdentifier]
+                VarIdentifier(
+                ) [VarIdentifier]
+              ) [VarIdentifiers]
+            ) [VarDeclDefinition]
+          ) [VarDeclaration]
+        ) [Declarations]
+        VarDeclaration(
+          VarDeclDefinition(
+            TypeName(
+            ) [TypeName]
+            FirstVarIdentifier(
+              VarIdentifier(
+              ) [VarIdentifier]
+            ) [FirstVarIdentifier]
+          ) [VarDeclDefinition]
+        ) [VarDeclaration]
+      ) [Declarations]
+      VarDeclaration(
+        VarDeclDefinition(
+          TypeName(
+          ) [TypeName]
+          FirstVarIdentifier(
+            VarIdentifier(
+            ) [VarIdentifier]
+          ) [FirstVarIdentifier]
+        ) [VarDeclDefinition]
+      ) [VarDeclaration]
+    ) [Declarations]
+    VarDeclaration(
+      VarDeclDefinition(
+        TypeName(
+        ) [TypeName]
+        FirstVarGlobalVarError(
+        ) [FirstVarGlobalVarError]
+      ) [VarDeclDefinition]
+    ) [VarDeclaration]
+  ) [Declarations]
+  NoMethodDeclarations(
+  ) [NoMethodDeclarations]
+) [Program]
