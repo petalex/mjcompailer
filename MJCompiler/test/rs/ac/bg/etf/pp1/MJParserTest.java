@@ -13,54 +13,52 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
 import rs.ac.bg.etf.pp1.ast.Program;
-import rs.ac.bg.etf.pp1.util.Log4JUtils;
+import rs.ac.bg.etf.pp1.util.Log4J;
 
 public class MJParserTest {
-
 	static {
-		DOMConfigurator.configure(Log4JUtils.instance().findLoggerConfigFile());
-		Log4JUtils.instance().prepareLogFile(Logger.getRootLogger());
+		DOMConfigurator.configure(Log4J.getInstance().findLoggerConfigFile());
+		Log4J.getInstance().prepareLogFile(Logger.getRootLogger());
 	}
 	
-	public static void main(String[] args) throws Exception {
-		
-		Logger log = Logger.getLogger(MJParserTest.class);
-		
-		Reader br = null;
+	public static void main(String[] args) throws IOException {
+		Logger logger = Logger.getLogger(MJLexerTest.class);
+		Reader bufferReader = null;
 		try {
-			File sourceCode = new File("test/recovery.mj");
-			log.info("Compiling source file: " + sourceCode.getAbsolutePath());
+			File sourceCode = new File("test/test-parser-program.mj");
+			bufferReader = new BufferedReader(new FileReader(sourceCode));
 			
-			br = new BufferedReader(new FileReader(sourceCode));
-			Yylex lexer = new Yylex(br);
+			logger.info("Compiling source file: " + sourceCode.getAbsolutePath());
 			
-			MJParser p = new MJParser(lexer);
+			Yylex lexer = new Yylex(bufferReader);
 			
-			log.info("Parsing started");
+			MJParser parser = new MJParser(lexer);
 			
-	        Symbol s = p.parse();
-	        Program prog = (Program)(s.value);
+			logger.info("Parsing started");
+			
+	        Symbol symbol = parser.parse();
+	        Program program = (Program)(symbol.value);
 	        
-	        log.info("Parsing successful!");
+	        logger.info("Parsing successful!");
 	        
-			// ispis sintaksnog stabla
-			log.info(prog.toString(""));
-			//log.info("===================================");
+	        // Syntax tree
+	        logger.info(program.toString(""));
 
-			/*// ispis prepoznatih programskih konstrukcija
-			RuleVisitor v = new RuleVisitor();
-			prog.traverseBottomUp(v); 
-	      
-			log.info(" Print count calls = " + v.printCallCount);
-
-			log.info(" Deklarisanih promenljivih ima = " + v.varDeclCount);*/
-			
-		} 
-		finally {
-			if (br != null) try { br.close(); } catch (IOException e1) { log.error(e1.getMessage(), e1); }
+			/*RuleVisitor visitor = new RuleVisitor();
+			program.traverseBottomUp(visitor);
+			logger.info(" Print count calls = " + visitor.printCallCount);
+			logger.info(" Deklarisanih promenljivih ima = " + visitor.varDeclCount);*/
+		} catch (Exception exception) {
+			exception.printStackTrace();
 		}
-
-	}
-	
-	
+		finally {
+			if (bufferReader != null) {
+				try { 
+					bufferReader.close(); 
+				} catch (IOException exception) { 
+					logger.error(exception.getMessage(), exception);
+				} 
+			}
+		}
+	}	
 }

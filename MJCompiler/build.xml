@@ -5,7 +5,7 @@
 		<delete>
 			<fileset dir="src/rs/ac/bg/etf/pp1">
 				<exclude name="sym_old.java"/>
-				<exclude name="util/Log4JUtils.java"/>
+				<exclude name="util/Log4J.java"/>
 				<exclude name="Yylex.java"/>
 			</fileset>
 		</delete>

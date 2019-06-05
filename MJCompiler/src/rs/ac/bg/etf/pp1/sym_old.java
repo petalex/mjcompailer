@@ -1,7 +1,6 @@
 package rs.ac.bg.etf.pp1;
 
 public class sym_old {
-
 	// Keywords
 	public static final int PROGRAM = 1;
 	public static final int BREAK = 2;

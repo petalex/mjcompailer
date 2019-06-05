@@ -5,12 +5,12 @@ import java_cup.runtime.Symbol;
 %%
 
 %{
-	private Symbol new_symbol(int type) {
-		return new Symbol(type, yyline+1, yycolumn);
+	private Symbol createSymbol(int type) {
+		return new Symbol(type, yyline + 1, yycolumn);
 	}
 	
-	private Symbol new_symbol(int type, Object value) {
-		return new Symbol(type, yyline+1, yycolumn, value);
+	private Symbol createSymbol(int type, Object value) {
+		return new Symbol(type, yyline + 1, yycolumn, value);
 	}
 %}
 
@@ -18,10 +18,10 @@ import java_cup.runtime.Symbol;
 %line
 %column
 
-%xstate COMMENT
+%xstate YYCOMMENT
 
 %eofval{
-	return new_symbol(sym.EOF);
+	return createSymbol(sym.EOF);
 %eofval}
 
 %%
@@ -32,57 +32,57 @@ import java_cup.runtime.Symbol;
 "\b"							{ }
 "\f"							{ }
 
-"program"						{ return new_symbol(sym.PROGRAM, yytext()); }
-"break"							{ return new_symbol(sym.BREAK, yytext()); }
-"class"							{ return new_symbol(sym.CLASS, yytext()); }
-"interface"						{ return new_symbol(sym.INTERFACE, yytext()); }
-"enum"							{ return new_symbol(sym.ENUM, yytext()); }
-"else"							{ return new_symbol(sym.ELSE, yytext()); }
-"const"							{ return new_symbol(sym.CONST, yytext()); }
-"if"							{ return new_symbol(sym.IF, yytext()); }
-"new"							{ return new_symbol(sym.NEW, yytext()); }
-"print"							{ return new_symbol(sym.PRINT, yytext()); }
-"read"							{ return new_symbol(sym.READ, yytext()); }
-"return"						{ return new_symbol(sym.RETURN, yytext()); }
-"void"							{ return new_symbol(sym.VOID, yytext()); }
-"for"							{ return new_symbol(sym.FOR, yytext()); }
-"extends"						{ return new_symbol(sym.EXTENDS, yytext()); }
-"implements"					{ return new_symbol(sym.IMPLEMENTS, yytext()); }
-"continue"						{ return new_symbol(sym.CONTINUE, yytext()); }
+"program"						{ return createSymbol(sym.PROGRAM, yytext()); }
+"break"							{ return createSymbol(sym.BREAK, yytext()); }
+"class"							{ return createSymbol(sym.CLASS, yytext()); }
+"interface"						{ return createSymbol(sym.INTERFACE, yytext()); }
+"enum"							{ return createSymbol(sym.ENUM, yytext()); }
+"else"							{ return createSymbol(sym.ELSE, yytext()); }
+"const"							{ return createSymbol(sym.CONST, yytext()); }
+"if"							{ return createSymbol(sym.IF, yytext()); }
+"new"							{ return createSymbol(sym.NEW, yytext()); }
+"print"							{ return createSymbol(sym.PRINT, yytext()); }
+"read"							{ return createSymbol(sym.READ, yytext()); }
+"return"						{ return createSymbol(sym.RETURN, yytext()); }
+"void"							{ return createSymbol(sym.VOID, yytext()); }
+"for"							{ return createSymbol(sym.FOR, yytext()); }
+"extends"						{ return createSymbol(sym.EXTENDS, yytext()); }
+"implements"					{ return createSymbol(sym.IMPLEMENTS, yytext()); }
+"continue"						{ return createSymbol(sym.CONTINUE, yytext()); }
 
-("true"|"false")				{ return new_symbol(sym.BOOL, yytext()); }
-([a-z]|[A-Z])[a-z|A-Z|0-9|_]*	{ return new_symbol(sym.IDENT, yytext()); }
-[0-9]+							{ return new_symbol(sym.NUM, new Integer(yytext())); }
-"'"[ -~]"'"						{ return new_symbol(sym.CHAR, yytext()); }
+("true"|"false")				{ return createSymbol(sym.BOOL, yytext()); }
+([a-z]|[A-Z])[a-z|A-Z|0-9|_]*	{ return createSymbol(sym.IDENT, yytext()); }
+[0-9]+							{ return createSymbol(sym.NUM, new Integer(yytext())); }
+"'"[ -~]"'"						{ return createSymbol(sym.CHAR, yytext()); }
 
-"+"								{ return new_symbol(sym.ADD, yytext()); }
-"-"								{ return new_symbol(sym.SUB, yytext()); }
-"*"								{ return new_symbol(sym.MUL, yytext()); }
-"/"								{ return new_symbol(sym.DIV, yytext()); }
-"%"								{ return new_symbol(sym.MOD, yytext()); }
-"=="							{ return new_symbol(sym.EQU, yytext()); }
-"!="							{ return new_symbol(sym.NEQ, yytext()); }
-">"								{ return new_symbol(sym.GRT, yytext()); }
-">="							{ return new_symbol(sym.GTE, yytext()); }
-"<"								{ return new_symbol(sym.LST, yytext()); }
-"<="							{ return new_symbol(sym.LTE, yytext()); }
-"&&"							{ return new_symbol(sym.AND, yytext()); }
-"||"							{ return new_symbol(sym.OR, yytext()); }
-"="								{ return new_symbol(sym.ASSIGN, yytext()); }
-"++"							{ return new_symbol(sym.INC, yytext()); }
-"--"							{ return new_symbol(sym.DEC, yytext()); }
-";"								{ return new_symbol(sym.SEMICOLON, yytext()); }
-","								{ return new_symbol(sym.COMMA, yytext()); }
-"."								{ return new_symbol(sym.PERIOD, yytext());}
-"("								{ return new_symbol(sym.LPARENT, yytext()); }
-")"								{ return new_symbol(sym.RPARENT, yytext()); }
-"["								{ return new_symbol(sym.LSQUARE, yytext()); }
-"]"								{ return new_symbol(sym.RSQUARE, yytext()); }
-"{"								{ return new_symbol(sym.LCURLY, yytext()); }
-"}"								{ return new_symbol(sym.RCURLY, yytext()); }
+"+"								{ return createSymbol(sym.ADD, yytext()); }
+"-"								{ return createSymbol(sym.SUB, yytext()); }
+"*"								{ return createSymbol(sym.MUL, yytext()); }
+"/"								{ return createSymbol(sym.DIV, yytext()); }
+"%"								{ return createSymbol(sym.MOD, yytext()); }
+"=="							{ return createSymbol(sym.EQU, yytext()); }
+"!="							{ return createSymbol(sym.NEQ, yytext()); }
+">"								{ return createSymbol(sym.GRT, yytext()); }
+">="							{ return createSymbol(sym.GTE, yytext()); }
+"<"								{ return createSymbol(sym.LST, yytext()); }
+"<="							{ return createSymbol(sym.LTE, yytext()); }
+"&&"							{ return createSymbol(sym.AND, yytext()); }
+"||"							{ return createSymbol(sym.OR, yytext()); }
+"="								{ return createSymbol(sym.ASSIGN, yytext()); }
+"++"							{ return createSymbol(sym.INC, yytext()); }
+"--"							{ return createSymbol(sym.DEC, yytext()); }
+";"								{ return createSymbol(sym.SEMICOLON, yytext()); }
+","								{ return createSymbol(sym.COMMA, yytext()); }
+"."								{ return createSymbol(sym.PERIOD, yytext());}
+"("								{ return createSymbol(sym.LPARENT, yytext()); }
+")"								{ return createSymbol(sym.RPARENT, yytext()); }
+"["								{ return createSymbol(sym.LSQUARE, yytext()); }
+"]"								{ return createSymbol(sym.RSQUARE, yytext()); }
+"{"								{ return createSymbol(sym.LCURLY, yytext()); }
+"}"								{ return createSymbol(sym.RCURLY, yytext()); }
 
-"//" 							{ yybegin(COMMENT); }
-<COMMENT> . 					{ yybegin(COMMENT); }
-<COMMENT> "\r\n" 				{ yybegin(YYINITIAL); }
+"//" 							{ yybegin(YYCOMMENT); }
+<YYCOMMENT> "\r\n" 				{ yybegin(YYINITIAL); }
+<YYCOMMENT> . 					{ }
 
-. 								{ System.err.println("[Lexer] Error:  Token \"" + yytext() + "\" could not be indentified (line: " + (yyline + 1) + ")"); }
+. 								{ System.err.println("[Lexer] Error:  Token \"" + yytext() + "\" could not be identified (Line: " + (yyline + 1) + ", Column: " + yycolumn + ")"); }

@@ -1,27 +1,315 @@
-INFO  07:50:46,747 - Compiling source file: C:\Users\dp150101d\Documents\Fakultet\VII semestar\PP1\Projekat\pp1\workspace\MJCompiler\test\recovery.mj
-INFO  07:50:46,754 - Parsing started
-INFO  07:50:46,843 - [Lexer] Token found (#2, program)
-INFO  07:50:46,843 - [Lexer] Token found (#19, P)
-INFO  07:50:46,843 - [Lexer] Token found (#19, int)
-INFO  07:50:46,844 - [Lexer] Token found (#19, val)
-INFO  07:50:46,845 - [Lexer] Token found (#19, x)
-INFO  07:50:46,847 - [Lexer] Token found (#40, ,)
-ERROR 07:50:46,847 - [Parser] Syntax error (line: 3)
-INFO  07:50:46,847 - [Lexer] Token found (#19, y)
-INFO  07:50:46,847 - [Lexer] Token found (#39, ;)
-INFO  07:50:46,848 - [Lexer] Token found (#19, char)
-ERROR 07:50:46,848 - Error recovery: Global var
-INFO  07:50:46,850 - [Lexer] Token found (#19, x)
-INFO  07:50:46,850 - [Lexer] Token found (#19, y)
-INFO  07:50:46,850 - [Lexer] Token found (#19, z)
-INFO  07:50:46,850 - [Lexer] Token found (#19, w)
-INFO  07:50:46,850 - [Lexer] Token found (#39, ;)
-ERROR 07:50:46,851 - [Parser] Syntax error (line: 4)
-INFO  07:50:46,851 - [Lexer] Token found (#46, {)
-INFO  07:50:46,851 - [Lexer] Token found (#47, })
-ERROR 07:50:46,852 - Error recovery: Global var
-INFO  07:50:46,856 - Parsing successful!
-INFO  07:50:46,857 - Program(
+INFO  02:15:21,518 - Compiling source file: C:\Users\dp150101d\Documents\Fakultet\VII semestar\PP1\Projekat\pp1\workspace\MJCompiler\test\test-parser-program.mj
+INFO  02:15:21,529 - Parsing started
+INFO  02:15:21,670 - [Lexer] Token #2: program
+INFO  02:15:21,671 - [Lexer] Token #19: P
+INFO  02:15:21,671 - [Lexer] Token #8: const
+INFO  02:15:21,674 - [Lexer] Token #19: int
+INFO  02:15:21,674 - [Lexer] Token #19: size
+INFO  02:15:21,675 - [Lexer] Token #36: =
+INFO  02:15:21,675 - [Lexer] Token #22: 10
+INFO  02:15:21,675 - [Lexer] Token #39: ;
+INFO  02:15:21,676 - [Lexer] Token #6: enum
+INFO  02:15:21,676 - [Lexer] Token #19: Num
+INFO  02:15:21,677 - [Lexer] Token #46: {
+INFO  02:15:21,677 - [Lexer] Token #19: ZERO
+INFO  02:15:21,677 - [Lexer] Token #40: ,
+INFO  02:15:21,678 - [Lexer] Token #19: ONE
+INFO  02:15:21,678 - [Lexer] Token #40: ,
+INFO  02:15:21,678 - [Lexer] Token #19: TEN
+INFO  02:15:21,678 - [Lexer] Token #36: =
+INFO  02:15:21,678 - [Lexer] Token #22: 10
+INFO  02:15:21,678 - [Lexer] Token #47: }
+INFO  02:15:21,679 - [Lexer] Token #5: interface
+INFO  02:15:21,679 - [Lexer] Token #19: I
+INFO  02:15:21,679 - [Lexer] Token #46: {
+INFO  02:15:21,679 - [Lexer] Token #19: int
+INFO  02:15:21,680 - [Lexer] Token #19: getp
+INFO  02:15:21,680 - [Lexer] Token #42: (
+INFO  02:15:21,680 - [Lexer] Token #19: int
+INFO  02:15:21,680 - [Lexer] Token #19: i
+INFO  02:15:21,680 - [Lexer] Token #43: )
+INFO  02:15:21,680 - [Lexer] Token #39: ;
+INFO  02:15:21,681 - [Lexer] Token #19: int
+INFO  02:15:21,681 - [Lexer] Token #19: getn
+INFO  02:15:21,681 - [Lexer] Token #42: (
+INFO  02:15:21,681 - [Lexer] Token #19: int
+INFO  02:15:21,681 - [Lexer] Token #19: i
+INFO  02:15:21,681 - [Lexer] Token #43: )
+INFO  02:15:21,681 - [Lexer] Token #39: ;
+INFO  02:15:21,681 - [Lexer] Token #47: }
+INFO  02:15:21,682 - [Lexer] Token #4: class
+INFO  02:15:21,682 - [Lexer] Token #19: Table
+INFO  02:15:21,682 - [Lexer] Token #17: implements
+INFO  02:15:21,684 - [Lexer] Token #19: I
+INFO  02:15:21,684 - [Lexer] Token #46: {
+INFO  02:15:21,685 - [Lexer] Token #19: int
+INFO  02:15:21,686 - [Lexer] Token #19: pos
+INFO  02:15:21,687 - [Lexer] Token #44: [
+INFO  02:15:21,687 - [Lexer] Token #45: ]
+INFO  02:15:21,687 - [Lexer] Token #40: ,
+INFO  02:15:21,691 - [Lexer] Token #19: neg
+INFO  02:15:21,692 - [Lexer] Token #44: [
+INFO  02:15:21,692 - [Lexer] Token #45: ]
+INFO  02:15:21,692 - [Lexer] Token #39: ;
+INFO  02:15:21,692 - [Lexer] Token #46: {
+INFO  02:15:21,692 - [Lexer] Token #14: void
+INFO  02:15:21,693 - [Lexer] Token #19: putp
+INFO  02:15:21,693 - [Lexer] Token #42: (
+INFO  02:15:21,693 - [Lexer] Token #19: int
+INFO  02:15:21,694 - [Lexer] Token #19: a
+INFO  02:15:21,694 - [Lexer] Token #40: ,
+INFO  02:15:21,694 - [Lexer] Token #19: int
+INFO  02:15:21,694 - [Lexer] Token #19: idx
+INFO  02:15:21,694 - [Lexer] Token #43: )
+INFO  02:15:21,694 - [Lexer] Token #46: {
+INFO  02:15:21,695 - [Lexer] Token #19: this
+INFO  02:15:21,696 - [Lexer] Token #41: .
+INFO  02:15:21,697 - [Lexer] Token #19: pos
+INFO  02:15:21,697 - [Lexer] Token #44: [
+INFO  02:15:21,697 - [Lexer] Token #19: idx
+INFO  02:15:21,698 - [Lexer] Token #45: ]
+INFO  02:15:21,698 - [Lexer] Token #36: =
+INFO  02:15:21,698 - [Lexer] Token #19: a
+INFO  02:15:21,702 - [Lexer] Token #39: ;
+INFO  02:15:21,702 - [Lexer] Token #47: }
+INFO  02:15:21,703 - [Lexer] Token #14: void
+INFO  02:15:21,705 - [Lexer] Token #19: putn
+INFO  02:15:21,705 - [Lexer] Token #42: (
+INFO  02:15:21,705 - [Lexer] Token #19: int
+INFO  02:15:21,705 - [Lexer] Token #19: a
+INFO  02:15:21,705 - [Lexer] Token #40: ,
+INFO  02:15:21,705 - [Lexer] Token #19: int
+INFO  02:15:21,705 - [Lexer] Token #19: idx
+INFO  02:15:21,705 - [Lexer] Token #43: )
+INFO  02:15:21,705 - [Lexer] Token #46: {
+INFO  02:15:21,705 - [Lexer] Token #19: this
+INFO  02:15:21,705 - [Lexer] Token #41: .
+INFO  02:15:21,706 - [Lexer] Token #19: neg
+INFO  02:15:21,706 - [Lexer] Token #44: [
+INFO  02:15:21,706 - [Lexer] Token #19: idx
+INFO  02:15:21,706 - [Lexer] Token #45: ]
+INFO  02:15:21,706 - [Lexer] Token #36: =
+INFO  02:15:21,713 - [Lexer] Token #19: a
+INFO  02:15:21,713 - [Lexer] Token #39: ;
+INFO  02:15:21,713 - [Lexer] Token #47: }
+INFO  02:15:21,713 - [Lexer] Token #19: int
+INFO  02:15:21,713 - [Lexer] Token #19: getp
+INFO  02:15:21,714 - [Lexer] Token #42: (
+INFO  02:15:21,714 - [Lexer] Token #19: int
+INFO  02:15:21,714 - [Lexer] Token #19: idx
+INFO  02:15:21,714 - [Lexer] Token #43: )
+INFO  02:15:21,714 - [Lexer] Token #46: {
+INFO  02:15:21,714 - [Lexer] Token #13: return
+INFO  02:15:21,714 - [Lexer] Token #19: pos
+INFO  02:15:21,714 - [Lexer] Token #44: [
+INFO  02:15:21,714 - [Lexer] Token #19: idx
+INFO  02:15:21,714 - [Lexer] Token #45: ]
+INFO  02:15:21,714 - [Lexer] Token #39: ;
+INFO  02:15:21,714 - [Lexer] Token #47: }
+INFO  02:15:21,715 - [Lexer] Token #19: int
+INFO  02:15:21,715 - [Lexer] Token #19: getn
+INFO  02:15:21,715 - [Lexer] Token #42: (
+INFO  02:15:21,715 - [Lexer] Token #19: int
+INFO  02:15:21,715 - [Lexer] Token #19: idx
+INFO  02:15:21,715 - [Lexer] Token #43: )
+INFO  02:15:21,716 - [Lexer] Token #46: {
+INFO  02:15:21,716 - [Lexer] Token #13: return
+INFO  02:15:21,716 - [Lexer] Token #19: neg
+INFO  02:15:21,716 - [Lexer] Token #44: [
+INFO  02:15:21,716 - [Lexer] Token #19: idx
+INFO  02:15:21,716 - [Lexer] Token #45: ]
+INFO  02:15:21,716 - [Lexer] Token #39: ;
+INFO  02:15:21,716 - [Lexer] Token #47: }
+INFO  02:15:21,716 - [Lexer] Token #47: }
+INFO  02:15:21,716 - [Lexer] Token #47: }
+INFO  02:15:21,717 - [Lexer] Token #19: Table
+INFO  02:15:21,717 - [Lexer] Token #19: val
+INFO  02:15:21,717 - [Lexer] Token #39: ;
+INFO  02:15:21,719 - [Lexer] Token #46: {
+INFO  02:15:21,720 - [Lexer] Token #14: void
+INFO  02:15:21,720 - [Lexer] Token #19: f
+INFO  02:15:21,720 - [Lexer] Token #42: (
+INFO  02:15:21,720 - [Lexer] Token #19: char
+INFO  02:15:21,720 - [Lexer] Token #19: ch
+INFO  02:15:21,720 - [Lexer] Token #40: ,
+INFO  02:15:21,720 - [Lexer] Token #19: int
+INFO  02:15:21,720 - [Lexer] Token #19: a
+INFO  02:15:21,720 - [Lexer] Token #40: ,
+INFO  02:15:21,721 - [Lexer] Token #19: int
+INFO  02:15:21,723 - [Lexer] Token #19: arg
+INFO  02:15:21,723 - [Lexer] Token #43: )
+INFO  02:15:21,723 - [Lexer] Token #19: int
+INFO  02:15:21,723 - [Lexer] Token #19: x
+INFO  02:15:21,723 - [Lexer] Token #39: ;
+INFO  02:15:21,723 - [Lexer] Token #46: {
+INFO  02:15:21,723 - [Lexer] Token #19: x
+INFO  02:15:21,724 - [Lexer] Token #36: =
+INFO  02:15:21,724 - [Lexer] Token #19: arg
+INFO  02:15:21,724 - [Lexer] Token #39: ;
+INFO  02:15:21,724 - [Lexer] Token #47: }
+INFO  02:15:21,724 - [Lexer] Token #14: void
+INFO  02:15:21,725 - [Lexer] Token #19: main
+INFO  02:15:21,725 - [Lexer] Token #42: (
+INFO  02:15:21,725 - [Lexer] Token #43: )
+INFO  02:15:21,727 - [Lexer] Token #19: int
+INFO  02:15:21,727 - [Lexer] Token #19: x
+INFO  02:15:21,728 - [Lexer] Token #40: ,
+INFO  02:15:21,728 - [Lexer] Token #19: i
+INFO  02:15:21,728 - [Lexer] Token #39: ;
+INFO  02:15:21,728 - [Lexer] Token #19: char
+INFO  02:15:21,728 - [Lexer] Token #19: c
+INFO  02:15:21,728 - [Lexer] Token #39: ;
+INFO  02:15:21,729 - [Lexer] Token #46: {
+INFO  02:15:21,729 - [Lexer] Token #19: val
+INFO  02:15:21,729 - [Lexer] Token #36: =
+INFO  02:15:21,729 - [Lexer] Token #10: new
+INFO  02:15:21,730 - [Lexer] Token #19: Table
+INFO  02:15:21,730 - [Lexer] Token #39: ;
+INFO  02:15:21,730 - [Lexer] Token #19: val
+INFO  02:15:21,730 - [Lexer] Token #41: .
+INFO  02:15:21,730 - [Lexer] Token #19: pos
+INFO  02:15:21,730 - [Lexer] Token #36: =
+INFO  02:15:21,731 - [Lexer] Token #10: new
+INFO  02:15:21,731 - [Lexer] Token #19: int
+INFO  02:15:21,731 - [Lexer] Token #44: [
+INFO  02:15:21,731 - [Lexer] Token #19: size
+INFO  02:15:21,731 - [Lexer] Token #45: ]
+INFO  02:15:21,731 - [Lexer] Token #39: ;
+INFO  02:15:21,731 - [Lexer] Token #19: val
+INFO  02:15:21,732 - [Lexer] Token #41: .
+INFO  02:15:21,734 - [Lexer] Token #19: neg
+INFO  02:15:21,735 - [Lexer] Token #36: =
+INFO  02:15:21,736 - [Lexer] Token #10: new
+INFO  02:15:21,736 - [Lexer] Token #19: int
+INFO  02:15:21,736 - [Lexer] Token #44: [
+INFO  02:15:21,737 - [Lexer] Token #19: size
+INFO  02:15:21,737 - [Lexer] Token #45: ]
+INFO  02:15:21,737 - [Lexer] Token #39: ;
+INFO  02:15:21,739 - [Lexer] Token #15: for
+INFO  02:15:21,739 - [Lexer] Token #42: (
+INFO  02:15:21,739 - [Lexer] Token #19: i
+INFO  02:15:21,739 - [Lexer] Token #36: =
+INFO  02:15:21,740 - [Lexer] Token #22: 0
+INFO  02:15:21,741 - [Lexer] Token #39: ;
+INFO  02:15:21,741 - [Lexer] Token #19: i
+INFO  02:15:21,742 - [Lexer] Token #32: <
+INFO  02:15:21,742 - [Lexer] Token #19: size
+INFO  02:15:21,744 - [Lexer] Token #39: ;
+INFO  02:15:21,744 - [Lexer] Token #19: i
+INFO  02:15:21,744 - [Lexer] Token #37: ++
+INFO  02:15:21,744 - [Lexer] Token #43: )
+INFO  02:15:21,745 - [Lexer] Token #46: {
+INFO  02:15:21,745 - [Lexer] Token #19: val
+INFO  02:15:21,745 - [Lexer] Token #41: .
+INFO  02:15:21,745 - [Lexer] Token #19: putp
+INFO  02:15:21,745 - [Lexer] Token #42: (
+INFO  02:15:21,745 - [Lexer] Token #22: 0
+INFO  02:15:21,745 - [Lexer] Token #40: ,
+INFO  02:15:21,746 - [Lexer] Token #19: i
+INFO  02:15:21,746 - [Lexer] Token #43: )
+INFO  02:15:21,746 - [Lexer] Token #39: ;
+INFO  02:15:21,746 - [Lexer] Token #19: val
+INFO  02:15:21,746 - [Lexer] Token #41: .
+INFO  02:15:21,747 - [Lexer] Token #19: putn
+INFO  02:15:21,747 - [Lexer] Token #42: (
+INFO  02:15:21,747 - [Lexer] Token #22: 0
+INFO  02:15:21,747 - [Lexer] Token #40: ,
+INFO  02:15:21,747 - [Lexer] Token #19: i
+INFO  02:15:21,747 - [Lexer] Token #43: )
+INFO  02:15:21,747 - [Lexer] Token #39: ;
+INFO  02:15:21,747 - [Lexer] Token #47: }
+INFO  02:15:21,747 - [Lexer] Token #19: f
+INFO  02:15:21,747 - [Lexer] Token #42: (
+INFO  02:15:21,747 - [Lexer] Token #19: c
+INFO  02:15:21,747 - [Lexer] Token #40: ,
+INFO  02:15:21,747 - [Lexer] Token #19: x
+INFO  02:15:21,747 - [Lexer] Token #40: ,
+INFO  02:15:21,747 - [Lexer] Token #19: i
+INFO  02:15:21,747 - [Lexer] Token #43: )
+INFO  02:15:21,747 - [Lexer] Token #39: ;
+INFO  02:15:21,748 - [Lexer] Token #12: read
+INFO  02:15:21,748 - [Lexer] Token #42: (
+INFO  02:15:21,748 - [Lexer] Token #19: x
+INFO  02:15:21,748 - [Lexer] Token #43: )
+INFO  02:15:21,748 - [Lexer] Token #39: ;
+INFO  02:15:21,748 - [Lexer] Token #15: for
+INFO  02:15:21,748 - [Lexer] Token #42: (
+INFO  02:15:21,748 - [Lexer] Token #39: ;
+INFO  02:15:21,749 - [Lexer] Token #19: x
+INFO  02:15:21,749 - [Lexer] Token #30: >
+INFO  02:15:21,749 - [Lexer] Token #22: 0
+INFO  02:15:21,812 - [Lexer] Token #39: ;
+INFO  02:15:21,812 - [Lexer] Token #43: )
+INFO  02:15:21,813 - [Lexer] Token #46: {
+INFO  02:15:21,813 - [Lexer] Token #9: if
+INFO  02:15:21,813 - [Lexer] Token #42: (
+INFO  02:15:21,814 - [Lexer] Token #19: Num
+INFO  02:15:21,814 - [Lexer] Token #41: .
+INFO  02:15:21,814 - [Lexer] Token #19: ZERO
+INFO  02:15:21,814 - [Lexer] Token #33: <=
+INFO  02:15:21,815 - [Lexer] Token #19: x
+INFO  02:15:21,842 - [Lexer] Token #34: &&
+INFO  02:15:21,843 - [Lexer] Token #19: x
+INFO  02:15:21,843 - [Lexer] Token #32: <
+INFO  02:15:21,844 - [Lexer] Token #19: size
+INFO  02:15:21,844 - [Lexer] Token #43: )
+INFO  02:15:21,845 - [Lexer] Token #46: {
+INFO  02:15:21,846 - [Lexer] Token #19: val
+INFO  02:15:21,847 - [Lexer] Token #41: .
+INFO  02:15:21,847 - [Lexer] Token #19: putp
+INFO  02:15:21,851 - [Lexer] Token #42: (
+INFO  02:15:21,867 - [Lexer] Token #19: val
+INFO  02:15:21,867 - [Lexer] Token #41: .
+INFO  02:15:21,869 - [Lexer] Token #19: getp
+INFO  02:15:21,870 - [Lexer] Token #42: (
+INFO  02:15:21,870 - [Lexer] Token #19: x
+INFO  02:15:21,871 - [Lexer] Token #43: )
+INFO  02:15:21,878 - [Lexer] Token #23: +
+INFO  02:15:21,879 - [Lexer] Token #19: Num
+INFO  02:15:21,908 - [Lexer] Token #41: .
+INFO  02:15:21,908 - [Lexer] Token #19: ONE
+INFO  02:15:21,909 - [Lexer] Token #43: )
+INFO  02:15:21,909 - [Lexer] Token #39: ;
+INFO  02:15:21,909 - [Lexer] Token #47: }
+INFO  02:15:21,910 - [Lexer] Token #7: else
+INFO  02:15:21,910 - [Lexer] Token #9: if
+INFO  02:15:21,910 - [Lexer] Token #42: (
+INFO  02:15:21,910 - [Lexer] Token #24: -
+INFO  02:15:21,910 - [Lexer] Token #19: size
+INFO  02:15:21,910 - [Lexer] Token #32: <
+INFO  02:15:21,913 - [Lexer] Token #19: x
+INFO  02:15:21,913 - [Lexer] Token #34: &&
+INFO  02:15:21,913 - [Lexer] Token #19: x
+INFO  02:15:21,914 - [Lexer] Token #32: <
+INFO  02:15:21,914 - [Lexer] Token #22: 0
+INFO  02:15:21,914 - [Lexer] Token #43: )
+INFO  02:15:21,914 - [Lexer] Token #46: {
+INFO  02:15:21,914 - [Lexer] Token #19: val
+INFO  02:15:21,914 - [Lexer] Token #41: .
+INFO  02:15:21,916 - [Lexer] Token #19: putn
+INFO  02:15:21,916 - [Lexer] Token #42: (
+INFO  02:15:21,916 - [Lexer] Token #19: val
+INFO  02:15:21,916 - [Lexer] Token #41: .
+INFO  02:15:21,916 - [Lexer] Token #19: getn
+INFO  02:15:21,917 - [Lexer] Token #42: (
+INFO  02:15:21,917 - [Lexer] Token #24: -
+INFO  02:15:21,917 - [Lexer] Token #19: x
+INFO  02:15:21,917 - [Lexer] Token #43: )
+INFO  02:15:21,917 - [Lexer] Token #23: +
+INFO  02:15:21,917 - [Lexer] Token #22: 1
+INFO  02:15:21,918 - [Lexer] Token #43: )
+INFO  02:15:21,918 - [Lexer] Token #39: ;
+INFO  02:15:21,918 - [Lexer] Token #47: }
+INFO  02:15:21,918 - [Lexer] Token #12: read
+INFO  02:15:21,918 - [Lexer] Token #42: (
+INFO  02:15:21,919 - [Lexer] Token #19: x
+INFO  02:15:21,919 - [Lexer] Token #43: )
+INFO  02:15:21,919 - [Lexer] Token #39: ;
+INFO  02:15:21,919 - [Lexer] Token #47: }
+INFO  02:15:21,919 - [Lexer] Token #47: }
+INFO  02:15:21,919 - [Lexer] Token #47: }
+INFO  02:15:21,921 - Parsing successful!
+INFO  02:15:21,940 - Program(
   Declarations(
     Declarations(
       Declarations(
@@ -29,33 +317,327 @@ INFO  07:50:46,857 - Program(
           Declarations(
             NoDeclarations(
             ) [NoDeclarations]
-            VarDeclaration(
-              VarDeclDefinition(
+            ConstDeclaration(
+              ConstDeclDefinition(
                 TypeName(
                 ) [TypeName]
-                FirstVarIdentifier(
-                  VarIdentifier(
-                  ) [VarIdentifier]
-                ) [FirstVarIdentifier]
-              ) [VarDeclDefinition]
-            ) [VarDeclaration]
+                FirstConstIdentifier(
+                  NumConstIdentifier(
+                   10
+                  ) [NumConstIdentifier]
+                ) [FirstConstIdentifier]
+              ) [ConstDeclDefinition]
+            ) [ConstDeclaration]
           ) [Declarations]
-          VarDeclaration(
+          EnumDeclaration(
+            EnumDeclDefinition(
+              EnumIdentifiers(
+                EnumIdentifiers(
+                  FirstEnumIdentifier(
+                    EnumIdentifier(
+                    ) [EnumIdentifier]
+                  ) [FirstEnumIdentifier]
+                  EnumIdentifier(
+                  ) [EnumIdentifier]
+                ) [EnumIdentifiers]
+                NumEnumIdentifier(
+                 10
+                ) [NumEnumIdentifier]
+              ) [EnumIdentifiers]
+            ) [EnumDeclDefinition]
+          ) [EnumDeclaration]
+        ) [Declarations]
+        InterfaceDeclaration(
+          InterfaceDeclDefinition(
+            InterfaceMethodDeclarations(
+              InterfaceMethodDeclarations(
+                NoInterfaceMethodDeclarations(
+                ) [NoInterfaceMethodDeclarations]
+                TypeInterfaceMethodDeclaration(
+                  TypeName(
+                  ) [TypeName]
+                  MethodFormalParameters(
+                    FirstFormalParameter(
+                      FormalParameter(
+                        TypeName(
+                        ) [TypeName]
+                      ) [FormalParameter]
+                    ) [FirstFormalParameter]
+                  ) [MethodFormalParameters]
+                ) [TypeInterfaceMethodDeclaration]
+              ) [InterfaceMethodDeclarations]
+              TypeInterfaceMethodDeclaration(
+                TypeName(
+                ) [TypeName]
+                MethodFormalParameters(
+                  FirstFormalParameter(
+                    FormalParameter(
+                      TypeName(
+                      ) [TypeName]
+                    ) [FormalParameter]
+                  ) [FirstFormalParameter]
+                ) [MethodFormalParameters]
+              ) [TypeInterfaceMethodDeclaration]
+            ) [InterfaceMethodDeclarations]
+          ) [InterfaceDeclDefinition]
+        ) [InterfaceDeclaration]
+      ) [Declarations]
+      ClassDeclaration(
+        ClassDeclDefinition(
+          NoExtendsClass(
+          ) [NoExtendsClass]
+          ImplementsInterfaces(
+            FirstType(
+              TypeName(
+              ) [TypeName]
+            ) [FirstType]
+          ) [ImplementsInterfaces]
+          VarDeclarations(
+            NoVarDeclarations(
+            ) [NoVarDeclarations]
             VarDeclDefinition(
               TypeName(
               ) [TypeName]
               VarIdentifiers(
                 FirstVarIdentifier(
-                  GlobalVarError(
-                  ) [GlobalVarError]
+                  ArrayVarIdentifier(
+                  ) [ArrayVarIdentifier]
                 ) [FirstVarIdentifier]
-                VarIdentifier(
-                ) [VarIdentifier]
+                ArrayVarIdentifier(
+                ) [ArrayVarIdentifier]
               ) [VarIdentifiers]
             ) [VarDeclDefinition]
-          ) [VarDeclaration]
-        ) [Declarations]
-        VarDeclaration(
+          ) [VarDeclarations]
+          ClassMethodDeclarations(
+            MethodDeclarations(
+              MethodDeclarations(
+                MethodDeclarations(
+                  MethodDeclarations(
+                    NoMethodDeclarations(
+                    ) [NoMethodDeclarations]
+                    VoidMethodDeclaration(
+                      MethodFormalParameters(
+                        FormalParameters(
+                          FirstFormalParameter(
+                            FormalParameter(
+                              TypeName(
+                              ) [TypeName]
+                            ) [FormalParameter]
+                          ) [FirstFormalParameter]
+                          FormalParameter(
+                            TypeName(
+                            ) [TypeName]
+                          ) [FormalParameter]
+                        ) [FormalParameters]
+                      ) [MethodFormalParameters]
+                      NoVarDeclarations(
+                      ) [NoVarDeclarations]
+                      Statements(
+                        NoStatements(
+                        ) [NoStatements]
+                        DesignatorStatement(
+                          AssignDesignatorStatement(
+                            ArrayDesignator(
+                              FieldDesignator(
+                                SimpleDesignator(
+                                ) [SimpleDesignator]
+                              ) [FieldDesignator]
+                              FirstTerm(
+                                FirstFactor(
+                                  DesignatorFactor(
+                                    SimpleDesignator(
+                                    ) [SimpleDesignator]
+                                  ) [DesignatorFactor]
+                                ) [FirstFactor]
+                              ) [FirstTerm]
+                            ) [ArrayDesignator]
+                            Assign(
+                            ) [Assign]
+                            FirstTerm(
+                              FirstFactor(
+                                DesignatorFactor(
+                                  SimpleDesignator(
+                                  ) [SimpleDesignator]
+                                ) [DesignatorFactor]
+                              ) [FirstFactor]
+                            ) [FirstTerm]
+                          ) [AssignDesignatorStatement]
+                        ) [DesignatorStatement]
+                      ) [Statements]
+                    ) [VoidMethodDeclaration]
+                  ) [MethodDeclarations]
+                  VoidMethodDeclaration(
+                    MethodFormalParameters(
+                      FormalParameters(
+                        FirstFormalParameter(
+                          FormalParameter(
+                            TypeName(
+                            ) [TypeName]
+                          ) [FormalParameter]
+                        ) [FirstFormalParameter]
+                        FormalParameter(
+                          TypeName(
+                          ) [TypeName]
+                        ) [FormalParameter]
+                      ) [FormalParameters]
+                    ) [MethodFormalParameters]
+                    NoVarDeclarations(
+                    ) [NoVarDeclarations]
+                    Statements(
+                      NoStatements(
+                      ) [NoStatements]
+                      DesignatorStatement(
+                        AssignDesignatorStatement(
+                          ArrayDesignator(
+                            FieldDesignator(
+                              SimpleDesignator(
+                              ) [SimpleDesignator]
+                            ) [FieldDesignator]
+                            FirstTerm(
+                              FirstFactor(
+                                DesignatorFactor(
+                                  SimpleDesignator(
+                                  ) [SimpleDesignator]
+                                ) [DesignatorFactor]
+                              ) [FirstFactor]
+                            ) [FirstTerm]
+                          ) [ArrayDesignator]
+                          Assign(
+                          ) [Assign]
+                          FirstTerm(
+                            FirstFactor(
+                              DesignatorFactor(
+                                SimpleDesignator(
+                                ) [SimpleDesignator]
+                              ) [DesignatorFactor]
+                            ) [FirstFactor]
+                          ) [FirstTerm]
+                        ) [AssignDesignatorStatement]
+                      ) [DesignatorStatement]
+                    ) [Statements]
+                  ) [VoidMethodDeclaration]
+                ) [MethodDeclarations]
+                TypeMethodDeclaration(
+                  TypeName(
+                  ) [TypeName]
+                  MethodFormalParameters(
+                    FirstFormalParameter(
+                      FormalParameter(
+                        TypeName(
+                        ) [TypeName]
+                      ) [FormalParameter]
+                    ) [FirstFormalParameter]
+                  ) [MethodFormalParameters]
+                  NoVarDeclarations(
+                  ) [NoVarDeclarations]
+                  Statements(
+                    NoStatements(
+                    ) [NoStatements]
+                    TypeReturnStatement(
+                      FirstTerm(
+                        FirstFactor(
+                          DesignatorFactor(
+                            ArrayDesignator(
+                              SimpleDesignator(
+                              ) [SimpleDesignator]
+                              FirstTerm(
+                                FirstFactor(
+                                  DesignatorFactor(
+                                    SimpleDesignator(
+                                    ) [SimpleDesignator]
+                                  ) [DesignatorFactor]
+                                ) [FirstFactor]
+                              ) [FirstTerm]
+                            ) [ArrayDesignator]
+                          ) [DesignatorFactor]
+                        ) [FirstFactor]
+                      ) [FirstTerm]
+                    ) [TypeReturnStatement]
+                  ) [Statements]
+                ) [TypeMethodDeclaration]
+              ) [MethodDeclarations]
+              TypeMethodDeclaration(
+                TypeName(
+                ) [TypeName]
+                MethodFormalParameters(
+                  FirstFormalParameter(
+                    FormalParameter(
+                      TypeName(
+                      ) [TypeName]
+                    ) [FormalParameter]
+                  ) [FirstFormalParameter]
+                ) [MethodFormalParameters]
+                NoVarDeclarations(
+                ) [NoVarDeclarations]
+                Statements(
+                  NoStatements(
+                  ) [NoStatements]
+                  TypeReturnStatement(
+                    FirstTerm(
+                      FirstFactor(
+                        DesignatorFactor(
+                          ArrayDesignator(
+                            SimpleDesignator(
+                            ) [SimpleDesignator]
+                            FirstTerm(
+                              FirstFactor(
+                                DesignatorFactor(
+                                  SimpleDesignator(
+                                  ) [SimpleDesignator]
+                                ) [DesignatorFactor]
+                              ) [FirstFactor]
+                            ) [FirstTerm]
+                          ) [ArrayDesignator]
+                        ) [DesignatorFactor]
+                      ) [FirstFactor]
+                    ) [FirstTerm]
+                  ) [TypeReturnStatement]
+                ) [Statements]
+              ) [TypeMethodDeclaration]
+            ) [MethodDeclarations]
+          ) [ClassMethodDeclarations]
+        ) [ClassDeclDefinition]
+      ) [ClassDeclaration]
+    ) [Declarations]
+    VarDeclaration(
+      VarDeclDefinition(
+        TypeName(
+        ) [TypeName]
+        FirstVarIdentifier(
+          VarIdentifier(
+          ) [VarIdentifier]
+        ) [FirstVarIdentifier]
+      ) [VarDeclDefinition]
+    ) [VarDeclaration]
+  ) [Declarations]
+  MethodDeclarations(
+    MethodDeclarations(
+      NoMethodDeclarations(
+      ) [NoMethodDeclarations]
+      VoidMethodDeclaration(
+        MethodFormalParameters(
+          FormalParameters(
+            FormalParameters(
+              FirstFormalParameter(
+                FormalParameter(
+                  TypeName(
+                  ) [TypeName]
+                ) [FormalParameter]
+              ) [FirstFormalParameter]
+              FormalParameter(
+                TypeName(
+                ) [TypeName]
+              ) [FormalParameter]
+            ) [FormalParameters]
+            FormalParameter(
+              TypeName(
+              ) [TypeName]
+            ) [FormalParameter]
+          ) [FormalParameters]
+        ) [MethodFormalParameters]
+        VarDeclarations(
+          NoVarDeclarations(
+          ) [NoVarDeclarations]
           VarDeclDefinition(
             TypeName(
             ) [TypeName]
@@ -64,9 +646,49 @@ INFO  07:50:46,857 - Program(
               ) [VarIdentifier]
             ) [FirstVarIdentifier]
           ) [VarDeclDefinition]
-        ) [VarDeclaration]
-      ) [Declarations]
-      VarDeclaration(
+        ) [VarDeclarations]
+        Statements(
+          NoStatements(
+          ) [NoStatements]
+          DesignatorStatement(
+            AssignDesignatorStatement(
+              SimpleDesignator(
+              ) [SimpleDesignator]
+              Assign(
+              ) [Assign]
+              FirstTerm(
+                FirstFactor(
+                  DesignatorFactor(
+                    SimpleDesignator(
+                    ) [SimpleDesignator]
+                  ) [DesignatorFactor]
+                ) [FirstFactor]
+              ) [FirstTerm]
+            ) [AssignDesignatorStatement]
+          ) [DesignatorStatement]
+        ) [Statements]
+      ) [VoidMethodDeclaration]
+    ) [MethodDeclarations]
+    VoidMethodDeclaration(
+      NoMethodFormalParameters(
+      ) [NoMethodFormalParameters]
+      VarDeclarations(
+        VarDeclarations(
+          NoVarDeclarations(
+          ) [NoVarDeclarations]
+          VarDeclDefinition(
+            TypeName(
+            ) [TypeName]
+            VarIdentifiers(
+              FirstVarIdentifier(
+                VarIdentifier(
+                ) [VarIdentifier]
+              ) [FirstVarIdentifier]
+              VarIdentifier(
+              ) [VarIdentifier]
+            ) [VarIdentifiers]
+          ) [VarDeclDefinition]
+        ) [VarDeclarations]
         VarDeclDefinition(
           TypeName(
           ) [TypeName]
@@ -75,17 +697,501 @@ INFO  07:50:46,857 - Program(
             ) [VarIdentifier]
           ) [FirstVarIdentifier]
         ) [VarDeclDefinition]
-      ) [VarDeclaration]
-    ) [Declarations]
-    VarDeclaration(
-      VarDeclDefinition(
-        TypeName(
-        ) [TypeName]
-        FirstVarGlobalVarError(
-        ) [FirstVarGlobalVarError]
-      ) [VarDeclDefinition]
-    ) [VarDeclaration]
-  ) [Declarations]
-  NoMethodDeclarations(
-  ) [NoMethodDeclarations]
+      ) [VarDeclarations]
+      Statements(
+        Statements(
+          Statements(
+            Statements(
+              Statements(
+                Statements(
+                  Statements(
+                    NoStatements(
+                    ) [NoStatements]
+                    DesignatorStatement(
+                      AssignDesignatorStatement(
+                        SimpleDesignator(
+                        ) [SimpleDesignator]
+                        Assign(
+                        ) [Assign]
+                        FirstTerm(
+                          FirstFactor(
+                            NewFactor(
+                              TypeName(
+                              ) [TypeName]
+                            ) [NewFactor]
+                          ) [FirstFactor]
+                        ) [FirstTerm]
+                      ) [AssignDesignatorStatement]
+                    ) [DesignatorStatement]
+                  ) [Statements]
+                  DesignatorStatement(
+                    AssignDesignatorStatement(
+                      FieldDesignator(
+                        SimpleDesignator(
+                        ) [SimpleDesignator]
+                      ) [FieldDesignator]
+                      Assign(
+                      ) [Assign]
+                      FirstTerm(
+                        FirstFactor(
+                          NewArrayFactor(
+                            TypeName(
+                            ) [TypeName]
+                            FirstTerm(
+                              FirstFactor(
+                                DesignatorFactor(
+                                  SimpleDesignator(
+                                  ) [SimpleDesignator]
+                                ) [DesignatorFactor]
+                              ) [FirstFactor]
+                            ) [FirstTerm]
+                          ) [NewArrayFactor]
+                        ) [FirstFactor]
+                      ) [FirstTerm]
+                    ) [AssignDesignatorStatement]
+                  ) [DesignatorStatement]
+                ) [Statements]
+                DesignatorStatement(
+                  AssignDesignatorStatement(
+                    FieldDesignator(
+                      SimpleDesignator(
+                      ) [SimpleDesignator]
+                    ) [FieldDesignator]
+                    Assign(
+                    ) [Assign]
+                    FirstTerm(
+                      FirstFactor(
+                        NewArrayFactor(
+                          TypeName(
+                          ) [TypeName]
+                          FirstTerm(
+                            FirstFactor(
+                              DesignatorFactor(
+                                SimpleDesignator(
+                                ) [SimpleDesignator]
+                              ) [DesignatorFactor]
+                            ) [FirstFactor]
+                          ) [FirstTerm]
+                        ) [NewArrayFactor]
+                      ) [FirstFactor]
+                    ) [FirstTerm]
+                  ) [AssignDesignatorStatement]
+                ) [DesignatorStatement]
+              ) [Statements]
+              ForStatement(
+                ForDesignatorStatement(
+                  AssignDesignatorStatement(
+                    SimpleDesignator(
+                    ) [SimpleDesignator]
+                    Assign(
+                    ) [Assign]
+                    FirstTerm(
+                      FirstFactor(
+                        NumFactor(
+                         0
+                        ) [NumFactor]
+                      ) [FirstFactor]
+                    ) [FirstTerm]
+                  ) [AssignDesignatorStatement]
+                ) [ForDesignatorStatement]
+                ForCondition(
+                  FirstConditionTerm(
+                    FirstConditionFact(
+                      ConditionExpressions(
+                        FirstConditionExpression(
+                          FirstTerm(
+                            FirstFactor(
+                              DesignatorFactor(
+                                SimpleDesignator(
+                                ) [SimpleDesignator]
+                              ) [DesignatorFactor]
+                            ) [FirstFactor]
+                          ) [FirstTerm]
+                        ) [FirstConditionExpression]
+                        LessThan(
+                        ) [LessThan]
+                        FirstTerm(
+                          FirstFactor(
+                            DesignatorFactor(
+                              SimpleDesignator(
+                              ) [SimpleDesignator]
+                            ) [DesignatorFactor]
+                          ) [FirstFactor]
+                        ) [FirstTerm]
+                      ) [ConditionExpressions]
+                    ) [FirstConditionFact]
+                  ) [FirstConditionTerm]
+                ) [ForCondition]
+                ForDesignatorStatement(
+                  IncDesignatorStatement(
+                    SimpleDesignator(
+                    ) [SimpleDesignator]
+                  ) [IncDesignatorStatement]
+                ) [ForDesignatorStatement]
+                BlockStatement(
+                  Statements(
+                    Statements(
+                      NoStatements(
+                      ) [NoStatements]
+                      DesignatorStatement(
+                        FunctionDesignatorStatement(
+                          FieldDesignator(
+                            SimpleDesignator(
+                            ) [SimpleDesignator]
+                          ) [FieldDesignator]
+                          ActualParameters(
+                            Expressions(
+                              FirstExpression(
+                                FirstTerm(
+                                  FirstFactor(
+                                    NumFactor(
+                                     0
+                                    ) [NumFactor]
+                                  ) [FirstFactor]
+                                ) [FirstTerm]
+                              ) [FirstExpression]
+                              FirstTerm(
+                                FirstFactor(
+                                  DesignatorFactor(
+                                    SimpleDesignator(
+                                    ) [SimpleDesignator]
+                                  ) [DesignatorFactor]
+                                ) [FirstFactor]
+                              ) [FirstTerm]
+                            ) [Expressions]
+                          ) [ActualParameters]
+                        ) [FunctionDesignatorStatement]
+                      ) [DesignatorStatement]
+                    ) [Statements]
+                    DesignatorStatement(
+                      FunctionDesignatorStatement(
+                        FieldDesignator(
+                          SimpleDesignator(
+                          ) [SimpleDesignator]
+                        ) [FieldDesignator]
+                        ActualParameters(
+                          Expressions(
+                            FirstExpression(
+                              FirstTerm(
+                                FirstFactor(
+                                  NumFactor(
+                                   0
+                                  ) [NumFactor]
+                                ) [FirstFactor]
+                              ) [FirstTerm]
+                            ) [FirstExpression]
+                            FirstTerm(
+                              FirstFactor(
+                                DesignatorFactor(
+                                  SimpleDesignator(
+                                  ) [SimpleDesignator]
+                                ) [DesignatorFactor]
+                              ) [FirstFactor]
+                            ) [FirstTerm]
+                          ) [Expressions]
+                        ) [ActualParameters]
+                      ) [FunctionDesignatorStatement]
+                    ) [DesignatorStatement]
+                  ) [Statements]
+                ) [BlockStatement]
+              ) [ForStatement]
+            ) [Statements]
+            DesignatorStatement(
+              FunctionDesignatorStatement(
+                SimpleDesignator(
+                ) [SimpleDesignator]
+                ActualParameters(
+                  Expressions(
+                    Expressions(
+                      FirstExpression(
+                        FirstTerm(
+                          FirstFactor(
+                            DesignatorFactor(
+                              SimpleDesignator(
+                              ) [SimpleDesignator]
+                            ) [DesignatorFactor]
+                          ) [FirstFactor]
+                        ) [FirstTerm]
+                      ) [FirstExpression]
+                      FirstTerm(
+                        FirstFactor(
+                          DesignatorFactor(
+                            SimpleDesignator(
+                            ) [SimpleDesignator]
+                          ) [DesignatorFactor]
+                        ) [FirstFactor]
+                      ) [FirstTerm]
+                    ) [Expressions]
+                    FirstTerm(
+                      FirstFactor(
+                        DesignatorFactor(
+                          SimpleDesignator(
+                          ) [SimpleDesignator]
+                        ) [DesignatorFactor]
+                      ) [FirstFactor]
+                    ) [FirstTerm]
+                  ) [Expressions]
+                ) [ActualParameters]
+              ) [FunctionDesignatorStatement]
+            ) [DesignatorStatement]
+          ) [Statements]
+          ReadStatement(
+            SimpleDesignator(
+            ) [SimpleDesignator]
+          ) [ReadStatement]
+        ) [Statements]
+        ForStatement(
+          NoForDesignatorStatement(
+          ) [NoForDesignatorStatement]
+          ForCondition(
+            FirstConditionTerm(
+              FirstConditionFact(
+                ConditionExpressions(
+                  FirstConditionExpression(
+                    FirstTerm(
+                      FirstFactor(
+                        DesignatorFactor(
+                          SimpleDesignator(
+                          ) [SimpleDesignator]
+                        ) [DesignatorFactor]
+                      ) [FirstFactor]
+                    ) [FirstTerm]
+                  ) [FirstConditionExpression]
+                  GreaterThan(
+                  ) [GreaterThan]
+                  FirstTerm(
+                    FirstFactor(
+                      NumFactor(
+                       0
+                      ) [NumFactor]
+                    ) [FirstFactor]
+                  ) [FirstTerm]
+                ) [ConditionExpressions]
+              ) [FirstConditionFact]
+            ) [FirstConditionTerm]
+          ) [ForCondition]
+          NoForDesignatorStatement(
+          ) [NoForDesignatorStatement]
+          BlockStatement(
+            Statements(
+              Statements(
+                NoStatements(
+                ) [NoStatements]
+                IfElseStatement(
+                  FirstConditionTerm(
+                    ConditionFacts(
+                      FirstConditionFact(
+                        ConditionExpressions(
+                          FirstConditionExpression(
+                            FirstTerm(
+                              FirstFactor(
+                                DesignatorFactor(
+                                  FieldDesignator(
+                                    SimpleDesignator(
+                                    ) [SimpleDesignator]
+                                  ) [FieldDesignator]
+                                ) [DesignatorFactor]
+                              ) [FirstFactor]
+                            ) [FirstTerm]
+                          ) [FirstConditionExpression]
+                          LessThanEqual(
+                          ) [LessThanEqual]
+                          FirstTerm(
+                            FirstFactor(
+                              DesignatorFactor(
+                                SimpleDesignator(
+                                ) [SimpleDesignator]
+                              ) [DesignatorFactor]
+                            ) [FirstFactor]
+                          ) [FirstTerm]
+                        ) [ConditionExpressions]
+                      ) [FirstConditionFact]
+                      ConditionExpressions(
+                        FirstConditionExpression(
+                          FirstTerm(
+                            FirstFactor(
+                              DesignatorFactor(
+                                SimpleDesignator(
+                                ) [SimpleDesignator]
+                              ) [DesignatorFactor]
+                            ) [FirstFactor]
+                          ) [FirstTerm]
+                        ) [FirstConditionExpression]
+                        LessThan(
+                        ) [LessThan]
+                        FirstTerm(
+                          FirstFactor(
+                            DesignatorFactor(
+                              SimpleDesignator(
+                              ) [SimpleDesignator]
+                            ) [DesignatorFactor]
+                          ) [FirstFactor]
+                        ) [FirstTerm]
+                      ) [ConditionExpressions]
+                    ) [ConditionFacts]
+                  ) [FirstConditionTerm]
+                  BlockStatement(
+                    Statements(
+                      NoStatements(
+                      ) [NoStatements]
+                      DesignatorStatement(
+                        FunctionDesignatorStatement(
+                          FieldDesignator(
+                            SimpleDesignator(
+                            ) [SimpleDesignator]
+                          ) [FieldDesignator]
+                          ActualParameters(
+                            FirstExpression(
+                              Terms(
+                                FirstTerm(
+                                  FirstFactor(
+                                    FunctionFactor(
+                                      FieldDesignator(
+                                        SimpleDesignator(
+                                        ) [SimpleDesignator]
+                                      ) [FieldDesignator]
+                                      ActualParameters(
+                                        FirstExpression(
+                                          FirstTerm(
+                                            FirstFactor(
+                                              DesignatorFactor(
+                                                SimpleDesignator(
+                                                ) [SimpleDesignator]
+                                              ) [DesignatorFactor]
+                                            ) [FirstFactor]
+                                          ) [FirstTerm]
+                                        ) [FirstExpression]
+                                      ) [ActualParameters]
+                                    ) [FunctionFactor]
+                                  ) [FirstFactor]
+                                ) [FirstTerm]
+                                Addition(
+                                ) [Addition]
+                                FirstFactor(
+                                  DesignatorFactor(
+                                    FieldDesignator(
+                                      SimpleDesignator(
+                                      ) [SimpleDesignator]
+                                    ) [FieldDesignator]
+                                  ) [DesignatorFactor]
+                                ) [FirstFactor]
+                              ) [Terms]
+                            ) [FirstExpression]
+                          ) [ActualParameters]
+                        ) [FunctionDesignatorStatement]
+                      ) [DesignatorStatement]
+                    ) [Statements]
+                  ) [BlockStatement]
+                  IfStatement(
+                    FirstConditionTerm(
+                      ConditionFacts(
+                        FirstConditionFact(
+                          ConditionExpressions(
+                            FirstConditionExpression(
+                              NegFirstTerm(
+                                FirstFactor(
+                                  DesignatorFactor(
+                                    SimpleDesignator(
+                                    ) [SimpleDesignator]
+                                  ) [DesignatorFactor]
+                                ) [FirstFactor]
+                              ) [NegFirstTerm]
+                            ) [FirstConditionExpression]
+                            LessThan(
+                            ) [LessThan]
+                            FirstTerm(
+                              FirstFactor(
+                                DesignatorFactor(
+                                  SimpleDesignator(
+                                  ) [SimpleDesignator]
+                                ) [DesignatorFactor]
+                              ) [FirstFactor]
+                            ) [FirstTerm]
+                          ) [ConditionExpressions]
+                        ) [FirstConditionFact]
+                        ConditionExpressions(
+                          FirstConditionExpression(
+                            FirstTerm(
+                              FirstFactor(
+                                DesignatorFactor(
+                                  SimpleDesignator(
+                                  ) [SimpleDesignator]
+                                ) [DesignatorFactor]
+                              ) [FirstFactor]
+                            ) [FirstTerm]
+                          ) [FirstConditionExpression]
+                          LessThan(
+                          ) [LessThan]
+                          FirstTerm(
+                            FirstFactor(
+                              NumFactor(
+                               0
+                              ) [NumFactor]
+                            ) [FirstFactor]
+                          ) [FirstTerm]
+                        ) [ConditionExpressions]
+                      ) [ConditionFacts]
+                    ) [FirstConditionTerm]
+                    BlockStatement(
+                      Statements(
+                        NoStatements(
+                        ) [NoStatements]
+                        DesignatorStatement(
+                          FunctionDesignatorStatement(
+                            FieldDesignator(
+                              SimpleDesignator(
+                              ) [SimpleDesignator]
+                            ) [FieldDesignator]
+                            ActualParameters(
+                              FirstExpression(
+                                Terms(
+                                  FirstTerm(
+                                    FirstFactor(
+                                      FunctionFactor(
+                                        FieldDesignator(
+                                          SimpleDesignator(
+                                          ) [SimpleDesignator]
+                                        ) [FieldDesignator]
+                                        ActualParameters(
+                                          FirstExpression(
+                                            NegFirstTerm(
+                                              FirstFactor(
+                                                DesignatorFactor(
+                                                  SimpleDesignator(
+                                                  ) [SimpleDesignator]
+                                                ) [DesignatorFactor]
+                                              ) [FirstFactor]
+                                            ) [NegFirstTerm]
+                                          ) [FirstExpression]
+                                        ) [ActualParameters]
+                                      ) [FunctionFactor]
+                                    ) [FirstFactor]
+                                  ) [FirstTerm]
+                                  Addition(
+                                  ) [Addition]
+                                  FirstFactor(
+                                    NumFactor(
+                                     1
+                                    ) [NumFactor]
+                                  ) [FirstFactor]
+                                ) [Terms]
+                              ) [FirstExpression]
+                            ) [ActualParameters]
+                          ) [FunctionDesignatorStatement]
+                        ) [DesignatorStatement]
+                      ) [Statements]
+                    ) [BlockStatement]
+                  ) [IfStatement]
+                ) [IfElseStatement]
+              ) [Statements]
+              ReadStatement(
+                SimpleDesignator(
+                ) [SimpleDesignator]
+              ) [ReadStatement]
+            ) [Statements]
+          ) [BlockStatement]
+        ) [ForStatement]
+      ) [Statements]
+    ) [VoidMethodDeclaration]
+  ) [MethodDeclarations]
 ) [Program]

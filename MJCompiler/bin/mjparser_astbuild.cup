@@ -6,35 +6,37 @@ import org.apache.log4j.*;
 import rs.ac.bg.etf.pp1.ast.*;
 
 parser code {:
-	Logger log = Logger.getLogger(getClass());
-   
-    public void report_fatal_error(String message, Object info) throws java.lang.Exception {
+	Logger logger = Logger.getLogger(getClass());
+	
+    public void syntaxError(String recoveryType, Symbol currentToken) {
+        reportError("Syntax error: " + recoveryType + " recovery", currentToken);
+    }
+  
+    public void unrecoveredSyntaxError(Symbol currentToken) throws java.lang.Exception {
+        reportFatalError("Syntax error: unrecovered", currentToken);
+    }
+    
+    public void reportFatalError(String message, Object info) throws java.lang.Exception {
       done_parsing();
-      report_error(message, info);
-    }
-  
-    public void syntax_error(Symbol cur_token) {
-        report_error("[Parser] Syntax error ", cur_token);
-    }
-  
-    public void unrecovered_syntax_error(Symbol cur_token) throws java.lang.Exception {
-        report_fatal_error("[Parser] Fatal error ", cur_token);
+      reportError(message, info);
     }
 
-    public void report_error(String message, Object info) {
-    	StringBuilder msg = new StringBuilder(message); 
-    	if (info instanceof Symbol)
-            msg.append ("(line: ").append(((Symbol)info).left).append(")");
-        log.error(msg.toString());
+    public void reportError(String message, Object info) {
+    	StringBuilder stringBuilder = new StringBuilder("[Parser] ");
+    	stringBuilder.append(message);
+    	if (info instanceof Symbol) {
+            stringBuilder.append("(line: ").append(((Symbol)info).left).append(")");
+        }
+        logger.error(stringBuilder.toString());
     }
 :}
 
 scan with {:
-	Symbol s = this.getScanner().next_token();
-	if (s != null && s.value != null) {
-		log.info("[Lexer] Token found (" + s.toString() + ", " + s.value.toString() + ")");
+	Symbol symbol = this.getScanner().next_token();
+	if (symbol != null && symbol.value != null) {
+		logger.info("[Lexer] Token " + symbol.toString() + ":" + symbol.value.toString());
 	}
-	return s;
+	return symbol;
 :}
 
 
@@ -127,18 +129,16 @@ EnumIdent ::= (NumEnumIdentifier) IDENT ASSIGN NUM:N1 {: RESULT=new NumEnumIdent
 			  (EnumIdentifier) IDENT {: RESULT=new EnumIdentifier(); :}
 			  ;
 
-VarDecl ::= (VarDeclDefinition) Type:T1 VarIdentList:V2 {: RESULT=new VarDeclDefinition(T1, V2); RESULT.setLine(T1left); :};
+VarDecl ::= (VarDeclDefinition) Type:T1 VarIdentList:V2 SEMICOLON {: RESULT=new VarDeclDefinition(T1, V2); RESULT.setLine(T1left); :};
 
-VarIdentList ::= (VarIdentifiers) VarIdentList:V1 COMMA VarIdent:V2 SEMICOLON {: RESULT=new VarIdentifiers(V1, V2); RESULT.setLine(V1left); :} |
-				 (FirstVarIdentifier) VarIdent:V1 {: RESULT=new FirstVarIdentifier(V1); RESULT.setLine(V1left); :} |
-				 (FirstVarGlobalVarError) error SEMICOLON
-				 {: parser.report_error("Error recovery: Global var", null); :} {: RESULT=new FirstVarGlobalVarError(); :}
+VarIdentList ::= (VarIdentifiers) VarIdentList:V1 COMMA VarIdent:V2 {: RESULT=new VarIdentifiers(V1, V2); RESULT.setLine(V1left); :} |
+				 (FirstVarIdentifier) VarIdent:V1 {: RESULT=new FirstVarIdentifier(V1); RESULT.setLine(V1left); :}
 				 ;
 
 VarIdent ::= (ArrayVarIdentifier) IDENT LSQUARE RSQUARE {: RESULT=new ArrayVarIdentifier(); :} |
 			 (VarIdentifier) IDENT {: RESULT=new VarIdentifier(); :} |
 			 (GlobalVarError) error
-			 {: parser.report_error("Error recovery: Global var", null); :} {: RESULT=new GlobalVarError(); :}
+			 {: parser.syntaxError("Global variable", null); :} {: RESULT=new GlobalVarError(); :}
 			 ;
 
 ClassDecl ::= (ClassDeclDefinition) CLASS IDENT Extends:E1 Implements:I2 LCURLY VarDeclList:V3 ClassMethodDeclList:C4 RCURLY {: RESULT=new ClassDeclDefinition(E1, I2, V3, C4); RESULT.setLine(E1left); :};
