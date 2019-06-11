@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/5/2019 2:11:39
+// 11/5/2019 2:45:35
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,13 +8,15 @@ package rs.ac.bg.etf.pp1.ast;
 public class TypeMethodDeclaration extends MethodDecl {
 
     private Type Type;
+    private String I2;
     private FormParams FormParams;
     private VarDeclList VarDeclList;
     private StatementList StatementList;
 
-    public TypeMethodDeclaration (Type Type, FormParams FormParams, VarDeclList VarDeclList, StatementList StatementList) {
+    public TypeMethodDeclaration (Type Type, String I2, FormParams FormParams, VarDeclList VarDeclList, StatementList StatementList) {
         this.Type=Type;
         if(Type!=null) Type.setParent(this);
+        this.I2=I2;
         this.FormParams=FormParams;
         if(FormParams!=null) FormParams.setParent(this);
         this.VarDeclList=VarDeclList;
@@ -29,6 +31,14 @@ public class TypeMethodDeclaration extends MethodDecl {
 
     public void setType(Type Type) {
         this.Type=Type;
+    }
+
+    public String getI2() {
+        return I2;
+    }
+
+    public void setI2(String I2) {
+        this.I2=I2;
     }
 
     public FormParams getFormParams() {
@@ -91,6 +101,9 @@ public class TypeMethodDeclaration extends MethodDecl {
             buffer.append(Type.toString("  "+tab));
         else
             buffer.append(tab+"  null");
+        buffer.append("\n");
+
+        buffer.append(" "+tab+I2);
         buffer.append("\n");
 
         if(FormParams!=null)

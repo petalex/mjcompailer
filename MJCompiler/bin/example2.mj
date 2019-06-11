@@ -1,0 +1,30 @@
+program Program
+	interface I { void m(); }
+	class A { private int x[], y[]; }
+	const int pi = 3, e = 2;
+	enum Broj { NULA, TRI = 3, PET = 5 }
+	class B extends A implements I {
+ 		private int i; private int x[];
+ 		{
+			public int getValue(int a) int b; bool c; { return this.i + this.x[0] + a; }
+			public void m(){}
+ 		}
+	}
+	class C extends B { private A theA; private int a; }
+{
+	void main() A a; C c; int i; int x[]; {
+		a = new A;
+		a.x = new int[Broj.PET];
+		a.y = new int[5];
+		c = new C;
+		c.theA = a;
+		c.x = new int[5];
+		x = new int[Broj.TRI];
+		read(c.i);
+		for(i = 0; i < 5; i++) {
+			read(c.x[i]); read(c.theA.x[i]);
+		}
+		print(c.getValue(c.theA.x[Broj.NULA]));
+		c.m();
+	}
+}

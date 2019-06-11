@@ -1,8 +1,0 @@
-INFO  22:55:42,744 - Compiling source file: C:\Users\dp150101d\Documents\Fakultet\VII semestar\PP1\Projekat\pp1\workspace\MJCompiler\test\recovery.mj
-INFO  22:55:42,752 - Parsing started
-INFO  22:55:42,828 - [Lexer] Token found (#2, program)
-INFO  22:55:42,828 - [Lexer] Token found (#19, P)
-INFO  22:55:42,828 - [Lexer] Token found (#19, int)
-INFO  22:55:42,829 - [Lexer] Token found (#22, 5)
-ERROR 22:55:42,829 - [Parser] Syntax error (line: 5)
-ERROR 22:55:42,830 - [Parser] Fatal error (line: 5)

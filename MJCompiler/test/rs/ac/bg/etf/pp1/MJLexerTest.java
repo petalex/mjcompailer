@@ -19,16 +19,19 @@ public class MJLexerTest {
 		Log4J.getInstance().prepareLogFile(Logger.getRootLogger());
 	}
 	
-	public static void main(String[] args) throws IOException {
-		Logger logger = Logger.getLogger(MJLexerTest.class);
+	public static final int NUM_OF_EXAMPLES = 2;
+	
+	private static Logger logger = Logger.getLogger(MJLexerTest.class);
+	
+	public static void compile(String fileName) throws IOException {
 		Reader bufferReader = null;
 		try {
-			File sourceCode = new File("test/test-lexer.mj");
+			File sourceCode = new File(fileName);
 			bufferReader = new BufferedReader(new FileReader(sourceCode));
 			
 			logger.info("Compiling source file: " + sourceCode.getAbsolutePath());
 			
-			Yylex lexer = new Yylex(bufferReader);
+			MJLexer lexer = new MJLexer(bufferReader);
 			Symbol currentToken = null;
 			while ((currentToken = lexer.next_token()).sym != sym.EOF) {
 				if (currentToken != null && currentToken.value != null)
@@ -44,5 +47,19 @@ public class MJLexerTest {
 				} 
 			}
 		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		logger.info("======= MJ LEXER TEST =======");
+		
+		// All lexical structures
+		compile("test/lexer/lexical_structures.mj");
+		
+		// Program examples
+		for (int i = 1; i <= NUM_OF_EXAMPLES; ++i) {
+			compile("test/example" + i + ".mj");
+		}
+		
+		logger.info("===== MJ LEXER TEST END =====");
 	}
 }

@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/5/2019 2:11:39
+// 11/5/2019 2:45:35
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -9,16 +9,16 @@ public class ForStatement extends Statement {
 
     private ForDesignatorStmt ForDesignatorStmt;
     private ForCond ForCond;
-    private ForDesignatorStmt ForDesignatorStmt1;
+    private LastForDesignatorStmt LastForDesignatorStmt;
     private Statement Statement;
 
-    public ForStatement (ForDesignatorStmt ForDesignatorStmt, ForCond ForCond, ForDesignatorStmt ForDesignatorStmt1, Statement Statement) {
+    public ForStatement (ForDesignatorStmt ForDesignatorStmt, ForCond ForCond, LastForDesignatorStmt LastForDesignatorStmt, Statement Statement) {
         this.ForDesignatorStmt=ForDesignatorStmt;
         if(ForDesignatorStmt!=null) ForDesignatorStmt.setParent(this);
         this.ForCond=ForCond;
         if(ForCond!=null) ForCond.setParent(this);
-        this.ForDesignatorStmt1=ForDesignatorStmt1;
-        if(ForDesignatorStmt1!=null) ForDesignatorStmt1.setParent(this);
+        this.LastForDesignatorStmt=LastForDesignatorStmt;
+        if(LastForDesignatorStmt!=null) LastForDesignatorStmt.setParent(this);
         this.Statement=Statement;
         if(Statement!=null) Statement.setParent(this);
     }
@@ -39,12 +39,12 @@ public class ForStatement extends Statement {
         this.ForCond=ForCond;
     }
 
-    public ForDesignatorStmt getForDesignatorStmt1() {
-        return ForDesignatorStmt1;
+    public LastForDesignatorStmt getLastForDesignatorStmt() {
+        return LastForDesignatorStmt;
     }
 
-    public void setForDesignatorStmt1(ForDesignatorStmt ForDesignatorStmt1) {
-        this.ForDesignatorStmt1=ForDesignatorStmt1;
+    public void setLastForDesignatorStmt(LastForDesignatorStmt LastForDesignatorStmt) {
+        this.LastForDesignatorStmt=LastForDesignatorStmt;
     }
 
     public Statement getStatement() {
@@ -62,7 +62,7 @@ public class ForStatement extends Statement {
     public void childrenAccept(Visitor visitor) {
         if(ForDesignatorStmt!=null) ForDesignatorStmt.accept(visitor);
         if(ForCond!=null) ForCond.accept(visitor);
-        if(ForDesignatorStmt1!=null) ForDesignatorStmt1.accept(visitor);
+        if(LastForDesignatorStmt!=null) LastForDesignatorStmt.accept(visitor);
         if(Statement!=null) Statement.accept(visitor);
     }
 
@@ -70,14 +70,14 @@ public class ForStatement extends Statement {
         accept(visitor);
         if(ForDesignatorStmt!=null) ForDesignatorStmt.traverseTopDown(visitor);
         if(ForCond!=null) ForCond.traverseTopDown(visitor);
-        if(ForDesignatorStmt1!=null) ForDesignatorStmt1.traverseTopDown(visitor);
+        if(LastForDesignatorStmt!=null) LastForDesignatorStmt.traverseTopDown(visitor);
         if(Statement!=null) Statement.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
         if(ForDesignatorStmt!=null) ForDesignatorStmt.traverseBottomUp(visitor);
         if(ForCond!=null) ForCond.traverseBottomUp(visitor);
-        if(ForDesignatorStmt1!=null) ForDesignatorStmt1.traverseBottomUp(visitor);
+        if(LastForDesignatorStmt!=null) LastForDesignatorStmt.traverseBottomUp(visitor);
         if(Statement!=null) Statement.traverseBottomUp(visitor);
         accept(visitor);
     }
@@ -99,8 +99,8 @@ public class ForStatement extends Statement {
             buffer.append(tab+"  null");
         buffer.append("\n");
 
-        if(ForDesignatorStmt1!=null)
-            buffer.append(ForDesignatorStmt1.toString("  "+tab));
+        if(LastForDesignatorStmt!=null)
+            buffer.append(LastForDesignatorStmt.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

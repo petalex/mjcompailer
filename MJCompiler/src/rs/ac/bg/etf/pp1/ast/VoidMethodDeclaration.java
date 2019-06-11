@@ -1,23 +1,33 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/5/2019 2:11:39
+// 11/5/2019 2:45:35
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class VoidMethodDeclaration extends MethodDecl {
 
+    private String I1;
     private FormParams FormParams;
     private VarDeclList VarDeclList;
     private StatementList StatementList;
 
-    public VoidMethodDeclaration (FormParams FormParams, VarDeclList VarDeclList, StatementList StatementList) {
+    public VoidMethodDeclaration (String I1, FormParams FormParams, VarDeclList VarDeclList, StatementList StatementList) {
+        this.I1=I1;
         this.FormParams=FormParams;
         if(FormParams!=null) FormParams.setParent(this);
         this.VarDeclList=VarDeclList;
         if(VarDeclList!=null) VarDeclList.setParent(this);
         this.StatementList=StatementList;
         if(StatementList!=null) StatementList.setParent(this);
+    }
+
+    public String getI1() {
+        return I1;
+    }
+
+    public void setI1(String I1) {
+        this.I1=I1;
     }
 
     public FormParams getFormParams() {
@@ -72,6 +82,9 @@ public class VoidMethodDeclaration extends MethodDecl {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
         buffer.append("VoidMethodDeclaration(\n");
+
+        buffer.append(" "+tab+I1);
+        buffer.append("\n");
 
         if(FormParams!=null)
             buffer.append(FormParams.toString("  "+tab));

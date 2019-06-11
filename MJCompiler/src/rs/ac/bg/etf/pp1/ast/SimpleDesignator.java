@@ -1,13 +1,24 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/5/2019 2:11:40
+// 11/5/2019 2:45:35
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class SimpleDesignator extends Designator {
 
-    public SimpleDesignator () {
+    private String I1;
+
+    public SimpleDesignator (String I1) {
+        this.I1=I1;
+    }
+
+    public String getI1() {
+        return I1;
+    }
+
+    public void setI1(String I1) {
+        this.I1=I1;
     }
 
     public void accept(Visitor visitor) {
@@ -29,6 +40,9 @@ public class SimpleDesignator extends Designator {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
         buffer.append("SimpleDesignator(\n");
+
+        buffer.append(" "+tab+I1);
+        buffer.append("\n");
 
         buffer.append(tab);
         buffer.append(") [SimpleDesignator]");

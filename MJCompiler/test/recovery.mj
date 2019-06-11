@@ -1,8 +1,0 @@
-program P
-	// Global var recovery
-	int val x, y;
-	char x y z w;
-	//int 5x, y;
-{
-	
-}

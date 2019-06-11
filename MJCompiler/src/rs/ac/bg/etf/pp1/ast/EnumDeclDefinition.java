@@ -1,17 +1,28 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/5/2019 2:11:39
+// 11/5/2019 2:45:34
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class EnumDeclDefinition extends EnumDecl {
 
+    private EnumName EnumName;
     private EnumIdentList EnumIdentList;
 
-    public EnumDeclDefinition (EnumIdentList EnumIdentList) {
+    public EnumDeclDefinition (EnumName EnumName, EnumIdentList EnumIdentList) {
+        this.EnumName=EnumName;
+        if(EnumName!=null) EnumName.setParent(this);
         this.EnumIdentList=EnumIdentList;
         if(EnumIdentList!=null) EnumIdentList.setParent(this);
+    }
+
+    public EnumName getEnumName() {
+        return EnumName;
+    }
+
+    public void setEnumName(EnumName EnumName) {
+        this.EnumName=EnumName;
     }
 
     public EnumIdentList getEnumIdentList() {
@@ -27,15 +38,18 @@ public class EnumDeclDefinition extends EnumDecl {
     }
 
     public void childrenAccept(Visitor visitor) {
+        if(EnumName!=null) EnumName.accept(visitor);
         if(EnumIdentList!=null) EnumIdentList.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
+        if(EnumName!=null) EnumName.traverseTopDown(visitor);
         if(EnumIdentList!=null) EnumIdentList.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
+        if(EnumName!=null) EnumName.traverseBottomUp(visitor);
         if(EnumIdentList!=null) EnumIdentList.traverseBottomUp(visitor);
         accept(visitor);
     }
@@ -44,6 +58,12 @@ public class EnumDeclDefinition extends EnumDecl {
         StringBuffer buffer=new StringBuffer();
         buffer.append(tab);
         buffer.append("EnumDeclDefinition(\n");
+
+        if(EnumName!=null)
+            buffer.append(EnumName.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
+        buffer.append("\n");
 
         if(EnumIdentList!=null)
             buffer.append(EnumIdentList.toString("  "+tab));

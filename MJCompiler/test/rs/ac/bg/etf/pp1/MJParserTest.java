@@ -21,17 +21,19 @@ public class MJParserTest {
 		Log4J.getInstance().prepareLogFile(Logger.getRootLogger());
 	}
 	
-	public static void main(String[] args) throws IOException {
-		Logger logger = Logger.getLogger(MJLexerTest.class);
+	public static final int NUM_OF_EXAMPLES = 2;
+	
+	private static Logger logger = Logger.getLogger(MJLexerTest.class);
+	
+	public static void compile(String fileName) throws Exception {
 		Reader bufferReader = null;
 		try {
-			File sourceCode = new File("test/test-parser-program.mj");
+			File sourceCode = new File(fileName);
 			bufferReader = new BufferedReader(new FileReader(sourceCode));
 			
 			logger.info("Compiling source file: " + sourceCode.getAbsolutePath());
 			
-			Yylex lexer = new Yylex(bufferReader);
-			
+			MJLexer lexer = new MJLexer(bufferReader);
 			MJParser parser = new MJParser(lexer);
 			
 			logger.info("Parsing started");
@@ -39,17 +41,14 @@ public class MJParserTest {
 	        Symbol symbol = parser.parse();
 	        Program program = (Program)(symbol.value);
 	        
-	        logger.info("Parsing successful!");
-	        
 	        // Syntax tree
 	        logger.info(program.toString(""));
-
-			/*RuleVisitor visitor = new RuleVisitor();
-			program.traverseBottomUp(visitor);
-			logger.info(" Print count calls = " + visitor.printCallCount);
-			logger.info(" Deklarisanih promenljivih ima = " + visitor.varDeclCount);*/
-		} catch (Exception exception) {
-			exception.printStackTrace();
+	        
+	        if (parser.isErrorDetected()) {
+	        	logger.error("Parsing unsuccessful (recovered error(s) found)");
+	        } else {
+	        	logger.info("Parsing successful");
+	        }
 		}
 		finally {
 			if (bufferReader != null) {
@@ -60,5 +59,19 @@ public class MJParserTest {
 				} 
 			}
 		}
+	}
+	
+	public static void main(String[] args) throws Exception {
+		logger.info("======= MJ PARSER TEST =======");
+		
+		// Error recovery
+		compile("test/parser/recovery.mj");
+		
+		// Program examples
+		for (int i = 1; i <= NUM_OF_EXAMPLES; ++i) {
+			compile("test/example" + i + ".mj");
+		}
+		
+		logger.info("===== MJ PARSER TEST END =====");
 	}	
 }

@@ -1,5 +1,0 @@
-INFO  16:06:43,914 - Compiling source file: C:\Users\dp150101d\Documents\Fakultet\VII semestar\PP1\Projekat\pp1\workspace\MJCompiler\test\recovery.mj
-INFO  16:06:43,922 - Parsing started
-INFO  16:06:43,925 - [Lexer] Token found (#2, program)
-INFO  16:06:43,925 - [Lexer] Token found (#19, P)
-INFO  16:06:43,925 - [Lexer] Token found (#19, char)

@@ -1,4 +1,0 @@
-INFO  22:35:37,040 - Compiling source file: C:\Users\dp150101d\Documents\Fakultet\VII semestar\PP1\Projekat\pp1\workspace\MJCompiler\test\recovery.mj
-INFO  22:35:37,047 - Parsing started
-ERROR 22:35:37,100 - [Parser] Syntax error (line: 5)
-ERROR 22:35:37,100 - [Parser] Fatal error (line: 5)

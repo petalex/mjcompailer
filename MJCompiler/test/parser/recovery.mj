@@ -1,0 +1,71 @@
+program P
+	// Program with all types of syntax error recoveries + initialization list
+	
+	// Global var recovery
+	int val x, y;
+	char x y z w;
+	//int 5x, y;
+	
+	class A1 extends B1 implements C1 { }
+	
+	// Inner class fields recovery
+	// TO-DO
+	
+	class A2 extends B2 { }
+	
+	// Extending class recovery
+	class A extnds B1 implements C1 { }
+	
+	class A3 implements C3, D3 { }
+	
+	class X extends 5Y { }
+	
+	// Class field recovery
+	class A4 {
+		private int a, b;
+		protected char c d;
+		public X e f, g;
+	}
+	
+	int a[];
+{
+	void f()
+	{
+		// For var declaration recovery
+		for (i >= 0; i < 10; i++) {}
+		for (i = 0; i < 10; i++) {}
+		for (i = 0; i < 10; ++i) {}
+		
+		// Initialization list
+		a = new int[3]{ 3, y, a[0], m1(5, 'a'), a[m2(3, 'b')]};
+	}
+	
+	void foo() 
+	int a, b c, d;
+	{
+		// Assignment recovery
+		a >= +5;
+	}
+	
+	// Formal parameter recovery
+	int m1(a, char b){ return 0; }
+	int m2(int a, char){ return 1; }
+	
+	// If condition recovery
+	void m3(int a, int b)
+	int c;
+	{
+		// OR condition error
+		if (a > 0 || b = 0) {
+			// AND condition error
+			if (b > 0 && a = 0 || a > b) {
+				c = 1;
+			}
+			else {
+				c = 2;
+			}
+		} else {
+			c = 3;
+		}
+	}
+}

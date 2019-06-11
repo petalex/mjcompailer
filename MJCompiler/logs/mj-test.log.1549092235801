@@ -1,6 +1,0 @@
-INFO  08:23:23,083 - Compiling source file: C:\Users\dp150101d\Documents\Fakultet\VII semestar\PP1\Projekat\pp1\workspace\MJCompiler\test\recovery.mj
-ERROR 08:23:23,161 - [Parser] Syntax error (line: 19)
-ERROR 08:23:23,162 - Error recovery: Global var -> ; (line: 19)
-ERROR 08:23:23,163 - [Parser] Syntax error (line: 20)
-ERROR 08:23:23,163 - Error recovery: Global var -> ; (line: 20)
-INFO  08:23:23,171 - Parsing successful!

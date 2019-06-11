@@ -14,6 +14,7 @@ import java_cup.runtime.Symbol;
 	}
 %}
 
+%class MJLexer
 %cup
 %line
 %column
@@ -49,11 +50,14 @@ import java_cup.runtime.Symbol;
 "extends"						{ return createSymbol(sym.EXTENDS, yytext()); }
 "implements"					{ return createSymbol(sym.IMPLEMENTS, yytext()); }
 "continue"						{ return createSymbol(sym.CONTINUE, yytext()); }
+"public"						{ return createSymbol(sym.PUBLIC, yytext()); }
+"protected"						{ return createSymbol(sym.PROTECTED, yytext()); }
+"private"						{ return createSymbol(sym.PRIVATE, yytext()); }
 
 ("true"|"false")				{ return createSymbol(sym.BOOL, yytext()); }
 ([a-z]|[A-Z])[a-z|A-Z|0-9|_]*	{ return createSymbol(sym.IDENT, yytext()); }
 [0-9]+							{ return createSymbol(sym.NUM, new Integer(yytext())); }
-"'"[ -~]"'"						{ return createSymbol(sym.CHAR, yytext()); }
+"'"[ -~]"'"						{ return createSymbol(sym.CHAR, yytext().charAt(1)); }
 
 "+"								{ return createSymbol(sym.ADD, yytext()); }
 "-"								{ return createSymbol(sym.SUB, yytext()); }

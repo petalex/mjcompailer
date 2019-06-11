@@ -1,25 +1,36 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/5/2019 2:11:39
+// 11/5/2019 2:45:35
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class ClassMethodDeclarations extends ClassMethodDeclList {
 
-    private MethodDeclList MethodDeclList;
+    private ClassMethodDeclList ClassMethodDeclList;
+    private ClassMethodDecl ClassMethodDecl;
 
-    public ClassMethodDeclarations (MethodDeclList MethodDeclList) {
-        this.MethodDeclList=MethodDeclList;
-        if(MethodDeclList!=null) MethodDeclList.setParent(this);
+    public ClassMethodDeclarations (ClassMethodDeclList ClassMethodDeclList, ClassMethodDecl ClassMethodDecl) {
+        this.ClassMethodDeclList=ClassMethodDeclList;
+        if(ClassMethodDeclList!=null) ClassMethodDeclList.setParent(this);
+        this.ClassMethodDecl=ClassMethodDecl;
+        if(ClassMethodDecl!=null) ClassMethodDecl.setParent(this);
     }
 
-    public MethodDeclList getMethodDeclList() {
-        return MethodDeclList;
+    public ClassMethodDeclList getClassMethodDeclList() {
+        return ClassMethodDeclList;
     }
 
-    public void setMethodDeclList(MethodDeclList MethodDeclList) {
-        this.MethodDeclList=MethodDeclList;
+    public void setClassMethodDeclList(ClassMethodDeclList ClassMethodDeclList) {
+        this.ClassMethodDeclList=ClassMethodDeclList;
+    }
+
+    public ClassMethodDecl getClassMethodDecl() {
+        return ClassMethodDecl;
+    }
+
+    public void setClassMethodDecl(ClassMethodDecl ClassMethodDecl) {
+        this.ClassMethodDecl=ClassMethodDecl;
     }
 
     public void accept(Visitor visitor) {
@@ -27,16 +38,19 @@ public class ClassMethodDeclarations extends ClassMethodDeclList {
     }
 
     public void childrenAccept(Visitor visitor) {
-        if(MethodDeclList!=null) MethodDeclList.accept(visitor);
+        if(ClassMethodDeclList!=null) ClassMethodDeclList.accept(visitor);
+        if(ClassMethodDecl!=null) ClassMethodDecl.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
-        if(MethodDeclList!=null) MethodDeclList.traverseTopDown(visitor);
+        if(ClassMethodDeclList!=null) ClassMethodDeclList.traverseTopDown(visitor);
+        if(ClassMethodDecl!=null) ClassMethodDecl.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
-        if(MethodDeclList!=null) MethodDeclList.traverseBottomUp(visitor);
+        if(ClassMethodDeclList!=null) ClassMethodDeclList.traverseBottomUp(visitor);
+        if(ClassMethodDecl!=null) ClassMethodDecl.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -45,8 +59,14 @@ public class ClassMethodDeclarations extends ClassMethodDeclList {
         buffer.append(tab);
         buffer.append("ClassMethodDeclarations(\n");
 
-        if(MethodDeclList!=null)
-            buffer.append(MethodDeclList.toString("  "+tab));
+        if(ClassMethodDeclList!=null)
+            buffer.append(ClassMethodDeclList.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
+        buffer.append("\n");
+
+        if(ClassMethodDecl!=null)
+            buffer.append(ClassMethodDecl.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");

@@ -1,24 +1,34 @@
 // generated with ast extension for cup
 // version 0.8
-// 5/5/2019 2:11:39
+// 11/5/2019 2:45:34
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class NumEnumIdentifier extends EnumIdent {
 
-    private Integer N1;
+    private String name;
+    private Integer value;
 
-    public NumEnumIdentifier (Integer N1) {
-        this.N1=N1;
+    public NumEnumIdentifier (String name, Integer value) {
+        this.name=name;
+        this.value=value;
     }
 
-    public Integer getN1() {
-        return N1;
+    public String getName() {
+        return name;
     }
 
-    public void setN1(Integer N1) {
-        this.N1=N1;
+    public void setName(String name) {
+        this.name=name;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value=value;
     }
 
     public void accept(Visitor visitor) {
@@ -41,7 +51,10 @@ public class NumEnumIdentifier extends EnumIdent {
         buffer.append(tab);
         buffer.append("NumEnumIdentifier(\n");
 
-        buffer.append(" "+tab+N1);
+        buffer.append(" "+tab+name);
+        buffer.append("\n");
+
+        buffer.append(" "+tab+value);
         buffer.append("\n");
 
         buffer.append(tab);
