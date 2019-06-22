@@ -1,6 +1,6 @@
 // generated with ast extension for cup
 // version 0.8
-// 11/5/2019 2:45:35
+// 22/5/2019 0:9:7
 
 
 package rs.ac.bg.etf.pp1.ast;
@@ -8,12 +8,12 @@ package rs.ac.bg.etf.pp1.ast;
 public class NumConstPrintStatement extends Statement {
 
     private Expression Expression;
-    private Integer N2;
+    private Integer value;
 
-    public NumConstPrintStatement (Expression Expression, Integer N2) {
+    public NumConstPrintStatement (Expression Expression, Integer value) {
         this.Expression=Expression;
         if(Expression!=null) Expression.setParent(this);
-        this.N2=N2;
+        this.value=value;
     }
 
     public Expression getExpression() {
@@ -24,12 +24,12 @@ public class NumConstPrintStatement extends Statement {
         this.Expression=Expression;
     }
 
-    public Integer getN2() {
-        return N2;
+    public Integer getValue() {
+        return value;
     }
 
-    public void setN2(Integer N2) {
-        this.N2=N2;
+    public void setValue(Integer value) {
+        this.value=value;
     }
 
     public void accept(Visitor visitor) {
@@ -61,7 +61,7 @@ public class NumConstPrintStatement extends Statement {
             buffer.append(tab+"  null");
         buffer.append("\n");
 
-        buffer.append(" "+tab+N2);
+        buffer.append(" "+tab+value);
         buffer.append("\n");
 
         buffer.append(tab);

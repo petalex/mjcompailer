@@ -61,17 +61,25 @@ terminal Integer NUM;
 terminal ADD, SUB, MUL, DIV, MOD, EQU, NEQ, GRT, GTE, LST, LTE, AND, OR;
 terminal ASSIGN, INC, DEC, SEMICOLON, COMMA, PERIOD, LPARENT, RPARENT, LSQUARE, RSQUARE, LCURLY, RCURLY;
 
-nonterminal Program, DeclList, MethodDeclList, Decl, ConstDecl, VarDecl, ClassDecl, EnumDecl, InterfaceDecl;
-nonterminal ConstIdentList, EnumIdentList, ClassFieldDecl, ClassModifier;
-nonterminal VarIdentList, ExtndsImplmnts, ExtendsImplements;
-nonterminal Extends, Implements, TypeList, VarDeclList, ClassFieldDeclList, ClassMethodDeclBlock, ClassMethodDeclList, MethodDecl;
-nonterminal ClassMethodDecl, InterfaceMethodDeclList, InterfaceMethodDecl, FormParams, FormParamList, FormParam, LastFormParam;
-nonterminal StatementList, Statement, DesignatorStmt, AssignDesignatorStmt, Condition, IfCond, ForDesignatorStmt;
-nonterminal LastForDesignatorStmt, LastForAssignDesignatorStmt, ForCond, Expression, Designator, ActualParams, ExpressionList;
-nonterminal CondTerm, CondFact, AssignOp, RelOp, AddOp, Term, MulOp, Factor, InitList;
+nonterminal Program, ProgName, DeclList, MethodDeclList, Decl, ConstDecl, VarDecl, ClassDecl, EnumDecl, InterfaceDecl;
+nonterminal ConstType, ConstIdentList, ConstIdent, EnumName, EnumIdentList, EnumIdent, FieldDecl, FieldDeclEnd;
+nonterminal VarIdent, LastVarIdent, VarType, VarIdentList, ExtndsImplmnts, ExtendsImplements, Extends, Implements;
+nonterminal TypeList, VarDeclList, FieldDeclList, ClassMethodDeclBlock, ClassMethodDeclList, MethodDecl;
+nonterminal MethType, MethDeclEnd, ClassMethodDecl, IntrfaceName, InterfaceMethType, InterfaceMethName;
+nonterminal InterfaceMethodDeclList, InterfaceMethodDecl, FormParams, FormParamList, FormParam, LastFormParam;
+nonterminal StatementList, Statement, DesignatorStmt, AssignDesignatorStmt, IfCond, ForDesignatorStmt;
+nonterminal LastForDesignatorStmt, LastForAssignDesignatorStmt, ForDeclEnd, ForCond, ActualParams;
+nonterminal ActualParamExprList, AssignOp, RelOp, AddOp, MulOp, InitList, InitExprList;
+nonterminal ExtndsImplmntsEnd, FldModifier, FldType, FieldIdentList, FieldIdent, LastFieldIdent;
+nonterminal ClassMethModifier, ClassMethType, ClassMethDeclEnd, Modifier;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, ConstIdent, EnumName, EnumIdent, VarIdent, LastVarIdent;
-nonterminal rs.etf.pp1.symboltable.concepts.Struct Type;
+nonterminal NewInitArrExprEnd, IfStmtEnd, ElseStmtEnd;
+
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Expression, Term, Factor;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTerm, CondFact;
+
+nonterminal rs.etf.pp1.symboltable.concepts.Obj MethName, ClassMethName, ClssName;
 
 precedence left ELSE;
 
@@ -90,7 +98,9 @@ Decl ::= (ConstDeclaration) ConstDecl |
 		 (InterfaceDeclaration) InterfaceDecl
 		 ;
 
-ConstDecl ::= (ConstDeclDefinition) CONST Type ConstIdentList SEMICOLON;
+ConstDecl ::= (ConstDeclDefinition) CONST ConstType ConstIdentList SEMICOLON;
+
+ConstType ::= (ConstantType) Type;
 
 ConstIdentList ::= (ConstIdentifiers) ConstIdentList COMMA ConstIdent |
 				   (FirstConstIdentifier) ConstIdent
@@ -113,14 +123,36 @@ EnumIdent ::= (NumEnumIdentifier) IDENT:name ASSIGN NUM:value |
 			  (EnumIdentifier) IDENT:name
 			  ;
 
-VarDecl ::= (VarDeclDefinition) Type VarIdentList;
+VarDecl ::= (VarDeclDefinition) VarType VarIdentList;
 
-ClassFieldDecl ::= (ClassFieldDeclDefinition) ClassModifier VarDecl;
-				 
-ClassModifier ::= (PublicClassModifier) PUBLIC |
-				  (ProtectedClassModifer) PROTECTED |
-				  (PrivateClassModiefr) PRIVATE
-				  ;
+VarType ::= (VariableType) Type;
+
+Modifier ::= (PublicModifier) PUBLIC |
+			 (ProtectedModifier) PROTECTED |
+			 (PrivateModifier) PRIVATE
+			 ;
+
+FieldDecl ::= (FieldDeclDefinition) FldModifier FldType FieldIdentList;
+
+FldModifier ::= (FieldModifer) Modifier;
+			 
+FldType ::= (FieldType) Type;
+
+FieldIdentList ::= (FieldIdentifiers) FieldIdent FieldIdentList |
+				   (LastFieldIdentifer) LastFieldIdent
+				   ;
+				   
+FieldIdent ::= (ArrayFieldIdentifier) IDENT:name LSQUARE RSQUARE COMMA |
+			   (FieldIdentifier) IDENT:name COMMA |
+			   (FieldCommaError) error COMMA:c
+	 	  	   {: parser.report_error("Syntax error recovery: Field declaration[comma] (line: " + cleft + ")", null); :}
+			   ;
+
+LastFieldIdent ::= (LastArrayFieldIdentifier) IDENT:name LSQUARE RSQUARE SEMICOLON |
+			 	   (LastSingleFieldIdentifier) IDENT:name SEMICOLON |
+			 	   (FieldSemicolonError) error SEMICOLON:s
+	 			   {: parser.report_error("Syntax error recovery: Field declaration[semicolon] (line: " + sleft + ")", null); :}
+			 	   ;
 
 VarIdentList ::= (VarIdentifiers) VarIdent VarIdentList |
 				 (LastVarIdentifier) LastVarIdent
@@ -138,11 +170,17 @@ LastVarIdent ::= (LastArrayVarIdentifier) IDENT:name LSQUARE RSQUARE SEMICOLON |
 	 			 {: parser.report_error("Syntax error recovery: Global variable declaration[semicolon] (line: " + sleft + ")", null); :}
 			 	 ;
 
-ClassDecl ::= (ClassDeclDefinition) CLASS IDENT ExtndsImplmnts ClassFieldDeclList ClassMethodDeclBlock RCURLY;
+ClassDecl ::= (ClassDeclDefinition) CLASS ClssName ExtndsImplmnts ExtndsImplmntsEnd FieldDeclList FieldDeclEnd ClassMethodDeclBlock RCURLY;
+
+ClssName ::= (ClassName) IDENT:name;
+
+ExtndsImplmntsEnd ::= (ExtendsAndImplementsEnd) /* Epsilon */;
+
+FieldDeclEnd ::= (ClassFieldDeclarationEnd) /* Epsilon */;
 
 ExtndsImplmnts ::= (ExtendsAndImplementsWrapper) ExtendsImplements TypeList LCURLY |
 				   (ExtendsClassWrapper) Extends |
-				   (ImpelmentsInterfacesWrapper) Implements LCURLY |
+				   (ImplementsInterfacesWrapper) Implements LCURLY |
 				   (NoExtendsAndImplements) LCURLY
 				   ;
 				 	  
@@ -166,23 +204,29 @@ VarDeclList ::= (VarDeclarations) VarDeclList VarDecl |
 			 	(NoVarDeclarations) /* Epsilon */
 			 	;
 			 	
-ClassFieldDeclList ::= (ClassFieldDeclarations) ClassFieldDeclList ClassFieldDecl |
-				 	   (NoClassFieldDeclarations) /* Epsilon */
-				 	   ;
+FieldDeclList ::= (FieldDeclarations) FieldDeclList FieldDecl |
+			 	  (NoFieldDeclarations) /* Epsilon */
+				  ;
 			 
 ClassMethodDeclBlock ::= (ClassMethodDeclarationsBlock) LCURLY ClassMethodDeclList  RCURLY |
 			 		 	 (NoClassMethodDeclarationsBlock) /* Epsilon */
 			 		 	 ;
 
-InterfaceDecl ::= (InterfaceDeclDefinition) INTERFACE IDENT LCURLY InterfaceMethodDeclList RCURLY;
+InterfaceDecl ::= (InterfaceDeclDefinition) INTERFACE IntrfaceName LCURLY InterfaceMethodDeclList RCURLY;
+
+IntrfaceName ::= (InterfaceName) IDENT:name;
 
 InterfaceMethodDeclList ::= (InterfaceMethodDeclarations) InterfaceMethodDeclList InterfaceMethodDecl |
 						    (NoInterfaceMethodDeclarations) /* Epsilon */
 					 	    ;
 
-InterfaceMethodDecl ::= (TypeInterfaceMethodDeclaration) Type IDENT LPARENT FormParams SEMICOLON |
-						(VoidInterfaceMethodDeclaration) VOID IDENT LPARENT FormParams SEMICOLON
-						;
+InterfaceMethodDecl ::= (InterfaceMethodDeclaration) InterfaceMethType InterfaceMethName LPARENT FormParams SEMICOLON;
+						
+InterfaceMethType ::= (InterfaceMethodType) Type |
+					  (NoInterfaceMethodType) VOID
+					  ;
+					  
+InterfaceMethName ::= (InterfaceMethodName) IDENT:name;
 
 MethodDeclList ::= (MethodDeclarations) MethodDeclList MethodDecl |
 				   (NoMethodDeclarations) /* Epsilon */
@@ -192,11 +236,27 @@ ClassMethodDeclList ::= (ClassMethodDeclarations) ClassMethodDeclList ClassMetho
 					    (NoClassMethodDeclarations) /* Epsilon */
 				 	    ;
 
-MethodDecl ::= (TypeMethodDeclaration) Type IDENT LPARENT FormParams VarDeclList LCURLY StatementList RCURLY |
-			   (VoidMethodDeclaration) VOID IDENT LPARENT FormParams VarDeclList LCURLY StatementList RCURLY
-			   ;
+MethodDecl ::= (MethodDeclaration) MethType MethName LPARENT FormParams VarDeclList MethDeclEnd LCURLY StatementList RCURLY;
+
+MethType ::= (MethodType) Type |
+			 (NoMethodType) VOID
+			 ;
+			 
+MethName ::= (MethodName) IDENT:name;
+
+MethDeclEnd ::= (MethodDeclarationEnd) /* Epsilon */;
 			   
-ClassMethodDecl ::= (ClassMethodDeclaration) ClassModifier MethodDecl;
+ClassMethodDecl ::= (ClassMethodDeclaration) ClassMethModifier ClassMethType ClassMethName LPARENT FormParams VarDeclList ClassMethDeclEnd LCURLY StatementList RCURLY;
+
+ClassMethModifier ::= (ClassMethodModifier) Modifier;
+
+ClassMethType ::= (ClassMethodType) Type |
+			 	  (NoClassMethodType) VOID
+			 	  ;
+			 
+ClassMethName ::= (ClassMethodName) IDENT:name;
+
+ClassMethDeclEnd ::= (ClassMethodDeclarationEnd) /* Epsilon */;
 
 FormParams ::= (MethodFormalParameters) FormParamList |
 			   (NoMethodFormalParameters) RPARENT
@@ -206,14 +266,14 @@ FormParamList ::= (FormalParameters) FormParam FormParamList |
 				  (LastFormalParameter) LastFormParam
 			   	  ;
 
-FormParam ::= (ArrayFormalParameter) Type IDENT LSQUARE RSQUARE COMMA |
-			  (FormalParameter) Type IDENT COMMA |
+FormParam ::= (ArrayFormalParameter) Type IDENT:name LSQUARE RSQUARE COMMA |
+			  (FormalParameter) Type IDENT:name COMMA |
 			  (FormalParameterCommaError) error COMMA:c
  	  	 	  {: parser.report_error("Syntax error recovery: Formal parameter[comma] (line: " + cleft + ")", null); :}
 			  ;
 			  
-LastFormParam ::= (LastArrayFormalParameter) Type IDENT LSQUARE RSQUARE RPARENT |
-			  	  (LastSingleFormalParameter) Type IDENT RPARENT |
+LastFormParam ::= (LastArrayFormalParameter) Type IDENT:name LSQUARE RSQUARE RPARENT |
+			  	  (LastSingleFormalParameter) Type IDENT:name RPARENT |
 			  	  (FormalParameterSemicolonError) error RPARENT:r
 		 		  {: parser.report_error("Syntax error recovery: Formal parameter[right parenthesis] (line: " + rleft + ")", null); :}
 			 	  ;
@@ -225,18 +285,22 @@ StatementList ::= (Statements) StatementList Statement |
 			   	  ;
 
 Statement ::= (DesignatorStatement) DesignatorStmt |
-			  (IfStatement) IF LPARENT IfCond Statement |
-			  (IfElseStatement) IF LPARENT IfCond Statement ELSE Statement |
-			  (ForStatement) FOR LPARENT ForDesignatorStmt ForCond SEMICOLON LastForDesignatorStmt Statement |
+			  (IfStatement) IF LPARENT IfCond Statement IfStmtEnd |
+			  (IfElseStatement) IF LPARENT IfCond Statement IfStmtEnd ELSE Statement ElseStmtEnd |
+			  (ForStatement) FOR LPARENT ForDesignatorStmt ForCond SEMICOLON LastForDesignatorStmt ForDeclEnd Statement |
 			  (BreakStatement) BREAK SEMICOLON |
 			  (ContinueStatement) CONTINUE SEMICOLON |
 			  (TypeReturnStatement) RETURN Expression SEMICOLON |
 			  (VoidReturnStatement) RETURN SEMICOLON |
 			  (ReadStatement) READ LPARENT Designator RPARENT SEMICOLON |
 			  (SimplePrintStatement) PRINT LPARENT Expression RPARENT SEMICOLON |
-			  (NumConstPrintStatement) PRINT LPARENT Expression COMMA NUM RPARENT SEMICOLON |
+			  (NumConstPrintStatement) PRINT LPARENT Expression COMMA NUM:value RPARENT SEMICOLON |
 			  (BlockStatement) LCURLY StatementList RCURLY
 			  ;
+			  
+IfStmtEnd ::= (IfStatementEnd) /* Epsilon */;
+
+ElseStmtEnd ::= (ElseStatementEnd) /* Epsilon */;
 
 DesignatorStmt ::= (AssignDesignatorStatementWrapper) AssignDesignatorStmt |
 				   (FunctionDesignatorStatement) Designator LPARENT ActualParams RPARENT SEMICOLON |
@@ -264,14 +328,16 @@ LastForAssignDesignatorStmt ::= (LastForAssignDesignatorStatement) Designator As
 							 	(LastForAssignError) error RPARENT:r
 						 		{: parser.report_error("Syntax error recovery: Assignment[last in for] (line: " + rleft + ")", null); :}
 							 	;
+							 	
+ForDeclEnd ::= (ForDeclarationEnd) /* Epsilon */;
 						
-ActualParams ::= (ActualParameters) ExpressionList |
+ActualParams ::= (ActualParameters) ActualParamExprList |
 			   	 (NoActualParameters) /* Epsilon */
 			   	 ;
 			   	 
-ExpressionList ::= (Expressions) ExpressionList COMMA Expression |
-				   (FirstExpression) Expression
-				   ;
+ActualParamExprList ::= (ActualParameterExpressions) ActualParamExprList COMMA Expression |
+				   		(FirstActualParameterExpression) Expression
+				   		;
 
 Condition ::= (ConditionTerms) Condition OR CondTerm |
 			  (FirstConditionTerm) CondTerm
@@ -281,8 +347,8 @@ CondTerm ::= (ConditionFacts) CondTerm AND CondFact |
 			 (FirstConditionFact) CondFact
 			 ;
 			 
-CondFact ::= (ConditionExpressions) CondFact RelOp Expression |
-			 (FirstConditionExpression) Expression
+CondFact ::= (ConditionExpressions) Expression RelOp Expression |
+			 (SimpleConditionExpression) Expression
 			 ;
 
 IfCond ::= (IfCondition) Condition RPARENT |
@@ -305,22 +371,28 @@ Term ::= (Factors) Term MulOp Factor |
 		 
 Factor ::= (FunctionFactor) Designator LPARENT ActualParams RPARENT |
 		   (DesignatorFactor) Designator |
-		   (NumFactor) NUM |
-		   (CharFactor) CHAR |
-		   (BoolFactor) BOOL |
+		   (NumFactor) NUM:value |
+		   (CharFactor) CHAR:value |
+		   (BoolFactor) BOOL:value |
 		   (NewArrayFactor) NEW Type LSQUARE Expression RSQUARE |
-		   (NewInitializedArrayFactor) NEW Type LSQUARE Expression RSQUARE LCURLY InitList RCURLY |
+		   (NewInitializedArrayFactor) NEW Type LSQUARE Expression RSQUARE NewInitArrExprEnd LCURLY InitList RCURLY |
 		   (NewFactor) NEW Type |
 		   (ExpressionFactor) LPARENT Expression RPARENT
 		   ;
 		   
-InitList ::= (InitializationList) ExpressionList |
+NewInitArrExprEnd ::= (NewInitializedArrayExpressionEnd) /* Epsilon */;
+		   
+InitList ::= (InitializationList) InitExprList |
 			 (EmptyInitializationList) /* Epsilon */
 			 ;
+			 
+InitExprList ::= (InitializationExpressions) InitExprList COMMA Expression |
+		   		 (FirstInitializationExpression) Expression
+		   		 ;
 
-Designator ::= (FieldDesignator) Designator PERIOD IDENT |
+Designator ::= (FieldDesignator) Designator PERIOD IDENT:field |
 			   (ArrayDesignator) Designator LSQUARE Expression RSQUARE |
-			   (SimpleDesignator) IDENT
+			   (SimpleDesignator) IDENT:name
 			   ;
 
 AssignOp ::= (Assign) ASSIGN;
@@ -334,7 +406,8 @@ RelOp ::= (Equal) EQU |
 		  ;
 
 AddOp ::= (Addition) ADD | 
-		  (Subtraction) SUB;
+		  (Subtraction) SUB
+		  ;
 
 MulOp ::= (Multiplication) MUL | 
 		  (Division) DIV | 

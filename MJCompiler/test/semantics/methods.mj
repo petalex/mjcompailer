@@ -1,0 +1,54 @@
+program Semantics
+{
+	//		Methods
+	void m1(int a, char b)
+		int c[];
+	{
+		c[0] = a + b;
+		c[1] = b;
+	}
+	
+	int m2()
+		char y;
+	{
+		return 1;
+	}
+	
+	// Return expressions differ in type
+	int m3(int x)
+		char y;
+	{
+		if (x == 0) {
+			return;
+		}
+		return 1;
+	}
+	
+	// Return expressions and method differ in type
+	int m4(int x)
+		char y;
+	{
+		if (x == 0) {
+			return;
+		}
+		return;
+	}
+	
+	int m5(int x)
+		char y;
+	{
+		if (x == 0) {
+			return 'b';
+		}
+		return 'a';
+	}
+	
+	// Recursive method
+	int m6(int x) 
+		int y[];
+	{
+		if (x == 0)
+			return 1;
+		return m6(x - 1) + 1;
+	}
+}

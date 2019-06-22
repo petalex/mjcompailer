@@ -62,6 +62,7 @@ terminal ADD, SUB, MUL, DIV, MOD, EQU, NEQ, GRT, GTE, LST, LTE, AND, OR;
 terminal ASSIGN, INC, DEC, SEMICOLON, COMMA, PERIOD, LPARENT, RPARENT, LSQUARE, RSQUARE, LCURLY, RCURLY;
 
 nonterminal Program Program;
+nonterminal ProgName ProgName;
 nonterminal DeclList DeclList;
 nonterminal MethodDeclList MethodDeclList;
 nonterminal Decl Decl;
@@ -70,10 +71,17 @@ nonterminal VarDecl VarDecl;
 nonterminal ClassDecl ClassDecl;
 nonterminal EnumDecl EnumDecl;
 nonterminal InterfaceDecl InterfaceDecl;
+nonterminal ConstType ConstType;
 nonterminal ConstIdentList ConstIdentList;
+nonterminal ConstIdent ConstIdent;
+nonterminal EnumName EnumName;
 nonterminal EnumIdentList EnumIdentList;
-nonterminal ClassFieldDecl ClassFieldDecl;
-nonterminal ClassModifier ClassModifier;
+nonterminal EnumIdent EnumIdent;
+nonterminal FieldDecl FieldDecl;
+nonterminal FieldDeclEnd FieldDeclEnd;
+nonterminal VarIdent VarIdent;
+nonterminal LastVarIdent LastVarIdent;
+nonterminal VarType VarType;
 nonterminal VarIdentList VarIdentList;
 nonterminal ExtndsImplmnts ExtndsImplmnts;
 nonterminal ExtendsImplements ExtendsImplements;
@@ -81,11 +89,16 @@ nonterminal Extends Extends;
 nonterminal Implements Implements;
 nonterminal TypeList TypeList;
 nonterminal VarDeclList VarDeclList;
-nonterminal ClassFieldDeclList ClassFieldDeclList;
+nonterminal FieldDeclList FieldDeclList;
 nonterminal ClassMethodDeclBlock ClassMethodDeclBlock;
 nonterminal ClassMethodDeclList ClassMethodDeclList;
 nonterminal MethodDecl MethodDecl;
+nonterminal MethType MethType;
+nonterminal MethDeclEnd MethDeclEnd;
 nonterminal ClassMethodDecl ClassMethodDecl;
+nonterminal IntrfaceName IntrfaceName;
+nonterminal InterfaceMethType InterfaceMethType;
+nonterminal InterfaceMethName InterfaceMethName;
 nonterminal InterfaceMethodDeclList InterfaceMethodDeclList;
 nonterminal InterfaceMethodDecl InterfaceMethodDecl;
 nonterminal FormParams FormParams;
@@ -96,28 +109,40 @@ nonterminal StatementList StatementList;
 nonterminal Statement Statement;
 nonterminal DesignatorStmt DesignatorStmt;
 nonterminal AssignDesignatorStmt AssignDesignatorStmt;
-nonterminal Condition Condition;
 nonterminal IfCond IfCond;
 nonterminal ForDesignatorStmt ForDesignatorStmt;
 nonterminal LastForDesignatorStmt LastForDesignatorStmt;
 nonterminal LastForAssignDesignatorStmt LastForAssignDesignatorStmt;
+nonterminal ForDeclEnd ForDeclEnd;
 nonterminal ForCond ForCond;
-nonterminal Expression Expression;
-nonterminal Designator Designator;
 nonterminal ActualParams ActualParams;
-nonterminal ExpressionList ExpressionList;
-nonterminal CondTerm CondTerm;
-nonterminal CondFact CondFact;
+nonterminal ActualParamExprList ActualParamExprList;
 nonterminal AssignOp AssignOp;
 nonterminal RelOp RelOp;
 nonterminal AddOp AddOp;
-nonterminal Term Term;
 nonterminal MulOp MulOp;
-nonterminal Factor Factor;
 nonterminal InitList InitList;
+nonterminal InitExprList InitExprList;
+nonterminal ExtndsImplmntsEnd ExtndsImplmntsEnd;
+nonterminal FldModifier FldModifier;
+nonterminal FldType FldType;
+nonterminal FieldIdentList FieldIdentList;
+nonterminal FieldIdent FieldIdent;
+nonterminal LastFieldIdent LastFieldIdent;
+nonterminal ClassMethModifier ClassMethModifier;
+nonterminal ClassMethType ClassMethType;
+nonterminal ClassMethDeclEnd ClassMethDeclEnd;
+nonterminal Modifier Modifier;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, ConstIdent, EnumName, EnumIdent, VarIdent, LastVarIdent;
-nonterminal rs.etf.pp1.symboltable.concepts.Struct Type;
+nonterminal NewInitArrExprEnd NewInitArrExprEnd;
+nonterminal IfStmtEnd IfStmtEnd;
+nonterminal ElseStmtEnd ElseStmtEnd;
+
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Designator;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Expression, Term, Factor;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Condition, CondTerm, CondFact;
+
+nonterminal rs.etf.pp1.symboltable.concepts.Obj MethName, ClassMethName, ClssName;
 
 precedence left ELSE;
 
@@ -136,7 +161,9 @@ Decl ::= (ConstDeclaration) ConstDecl:C1 {: RESULT=new ConstDeclaration(C1); RES
 		 (InterfaceDeclaration) InterfaceDecl:I1 {: RESULT=new InterfaceDeclaration(I1); RESULT.setLine(I1left); :}
 		 ;
 
-ConstDecl ::= (ConstDeclDefinition) CONST Type:T1 ConstIdentList:C2 SEMICOLON {: RESULT=new ConstDeclDefinition(T1, C2); RESULT.setLine(T1left); :};
+ConstDecl ::= (ConstDeclDefinition) CONST ConstType:C1 ConstIdentList:C2 SEMICOLON {: RESULT=new ConstDeclDefinition(C1, C2); RESULT.setLine(C1left); :};
+
+ConstType ::= (ConstantType) Type:T1 {: RESULT=new ConstantType(T1); RESULT.setLine(T1left); :};
 
 ConstIdentList ::= (ConstIdentifiers) ConstIdentList:C1 COMMA ConstIdent:C2 {: RESULT=new ConstIdentifiers(C1, C2); RESULT.setLine(C1left); :} |
 				   (FirstConstIdentifier) ConstIdent:C1 {: RESULT=new FirstConstIdentifier(C1); RESULT.setLine(C1left); :}
@@ -159,14 +186,36 @@ EnumIdent ::= (NumEnumIdentifier) IDENT:name ASSIGN NUM:value {: RESULT=new NumE
 			  (EnumIdentifier) IDENT:name {: RESULT=new EnumIdentifier(name); RESULT.setLine(nameleft); :}
 			  ;
 
-VarDecl ::= (VarDeclDefinition) Type:T1 VarIdentList:V2 {: RESULT=new VarDeclDefinition(T1, V2); RESULT.setLine(T1left); :};
+VarDecl ::= (VarDeclDefinition) VarType:V1 VarIdentList:V2 {: RESULT=new VarDeclDefinition(V1, V2); RESULT.setLine(V1left); :};
 
-ClassFieldDecl ::= (ClassFieldDeclDefinition) ClassModifier:C1 VarDecl:V2 {: RESULT=new ClassFieldDeclDefinition(C1, V2); RESULT.setLine(C1left); :};
-				 
-ClassModifier ::= (PublicClassModifier) PUBLIC {: RESULT=new PublicClassModifier(); :} |
-				  (ProtectedClassModifer) PROTECTED {: RESULT=new ProtectedClassModifer(); :} |
-				  (PrivateClassModiefr) PRIVATE {: RESULT=new PrivateClassModiefr(); :}
-				  ;
+VarType ::= (VariableType) Type:T1 {: RESULT=new VariableType(T1); RESULT.setLine(T1left); :};
+
+Modifier ::= (PublicModifier) PUBLIC {: RESULT=new PublicModifier(); :} |
+			 (ProtectedModifier) PROTECTED {: RESULT=new ProtectedModifier(); :} |
+			 (PrivateModifier) PRIVATE {: RESULT=new PrivateModifier(); :}
+			 ;
+
+FieldDecl ::= (FieldDeclDefinition) FldModifier:F1 FldType:F2 FieldIdentList:F3 {: RESULT=new FieldDeclDefinition(F1, F2, F3); RESULT.setLine(F1left); :};
+
+FldModifier ::= (FieldModifer) Modifier:M1 {: RESULT=new FieldModifer(M1); RESULT.setLine(M1left); :};
+			 
+FldType ::= (FieldType) Type:T1 {: RESULT=new FieldType(T1); RESULT.setLine(T1left); :};
+
+FieldIdentList ::= (FieldIdentifiers) FieldIdent:F1 FieldIdentList:F2 {: RESULT=new FieldIdentifiers(F1, F2); RESULT.setLine(F1left); :} |
+				   (LastFieldIdentifer) LastFieldIdent:L1 {: RESULT=new LastFieldIdentifer(L1); RESULT.setLine(L1left); :}
+				   ;
+				   
+FieldIdent ::= (ArrayFieldIdentifier) IDENT:name LSQUARE RSQUARE COMMA {: RESULT=new ArrayFieldIdentifier(name); RESULT.setLine(nameleft); :} |
+			   (FieldIdentifier) IDENT:name COMMA {: RESULT=new FieldIdentifier(name); RESULT.setLine(nameleft); :} |
+			   (FieldCommaError) error COMMA:c
+	 	  	   {: parser.report_error("Syntax error recovery: Field declaration[comma] (line: " + cleft + ")", null); :} {: RESULT=new FieldCommaError(); :}
+			   ;
+
+LastFieldIdent ::= (LastArrayFieldIdentifier) IDENT:name LSQUARE RSQUARE SEMICOLON {: RESULT=new LastArrayFieldIdentifier(name); RESULT.setLine(nameleft); :} |
+			 	   (LastSingleFieldIdentifier) IDENT:name SEMICOLON {: RESULT=new LastSingleFieldIdentifier(name); RESULT.setLine(nameleft); :} |
+			 	   (FieldSemicolonError) error SEMICOLON:s
+	 			   {: parser.report_error("Syntax error recovery: Field declaration[semicolon] (line: " + sleft + ")", null); :} {: RESULT=new FieldSemicolonError(); :}
+			 	   ;
 
 VarIdentList ::= (VarIdentifiers) VarIdent:V1 VarIdentList:V2 {: RESULT=new VarIdentifiers(V1, V2); RESULT.setLine(V1left); :} |
 				 (LastVarIdentifier) LastVarIdent:L1 {: RESULT=new LastVarIdentifier(L1); RESULT.setLine(L1left); :}
@@ -184,11 +233,17 @@ LastVarIdent ::= (LastArrayVarIdentifier) IDENT:name LSQUARE RSQUARE SEMICOLON {
 	 			 {: parser.report_error("Syntax error recovery: Global variable declaration[semicolon] (line: " + sleft + ")", null); :} {: RESULT=new GlobalVarSemicolonError(); :}
 			 	 ;
 
-ClassDecl ::= (ClassDeclDefinition) CLASS IDENT:I1 ExtndsImplmnts:E2 ClassFieldDeclList:C3 ClassMethodDeclBlock:C4 RCURLY {: RESULT=new ClassDeclDefinition(I1, E2, C3, C4); RESULT.setLine(I1left); :};
+ClassDecl ::= (ClassDeclDefinition) CLASS ClssName:C1 ExtndsImplmnts:E2 ExtndsImplmntsEnd:E3 FieldDeclList:F4 FieldDeclEnd:F5 ClassMethodDeclBlock:C6 RCURLY {: RESULT=new ClassDeclDefinition(C1, E2, E3, F4, F5, C6); RESULT.setLine(C1left); :};
+
+ClssName ::= (ClassName) IDENT:name {: RESULT=new ClassName(name); RESULT.setLine(nameleft); :};
+
+ExtndsImplmntsEnd ::= (ExtendsAndImplementsEnd) {: RESULT=new ExtendsAndImplementsEnd(); :} /* Epsilon */;
+
+FieldDeclEnd ::= (ClassFieldDeclarationEnd) {: RESULT=new ClassFieldDeclarationEnd(); :} /* Epsilon */;
 
 ExtndsImplmnts ::= (ExtendsAndImplementsWrapper) ExtendsImplements:E1 TypeList:T2 LCURLY {: RESULT=new ExtendsAndImplementsWrapper(E1, T2); RESULT.setLine(E1left); :} |
 				   (ExtendsClassWrapper) Extends:E1 {: RESULT=new ExtendsClassWrapper(E1); RESULT.setLine(E1left); :} |
-				   (ImpelmentsInterfacesWrapper) Implements:I1 LCURLY {: RESULT=new ImpelmentsInterfacesWrapper(I1); RESULT.setLine(I1left); :} |
+				   (ImplementsInterfacesWrapper) Implements:I1 LCURLY {: RESULT=new ImplementsInterfacesWrapper(I1); RESULT.setLine(I1left); :} |
 				   (NoExtendsAndImplements) LCURLY {: RESULT=new NoExtendsAndImplements(); :}
 				   ;
 				 	  
@@ -212,23 +267,29 @@ VarDeclList ::= (VarDeclarations) VarDeclList:V1 VarDecl:V2 {: RESULT=new VarDec
 			 	(NoVarDeclarations) {: RESULT=new NoVarDeclarations(); :} /* Epsilon */
 			 	;
 			 	
-ClassFieldDeclList ::= (ClassFieldDeclarations) ClassFieldDeclList:C1 ClassFieldDecl:C2 {: RESULT=new ClassFieldDeclarations(C1, C2); RESULT.setLine(C1left); :} |
-				 	   (NoClassFieldDeclarations) {: RESULT=new NoClassFieldDeclarations(); :} /* Epsilon */
-				 	   ;
+FieldDeclList ::= (FieldDeclarations) FieldDeclList:F1 FieldDecl:F2 {: RESULT=new FieldDeclarations(F1, F2); RESULT.setLine(F1left); :} |
+			 	  (NoFieldDeclarations) {: RESULT=new NoFieldDeclarations(); :} /* Epsilon */
+				  ;
 			 
 ClassMethodDeclBlock ::= (ClassMethodDeclarationsBlock) LCURLY ClassMethodDeclList:C1  RCURLY {: RESULT=new ClassMethodDeclarationsBlock(C1); RESULT.setLine(C1left); :} |
 			 		 	 (NoClassMethodDeclarationsBlock) {: RESULT=new NoClassMethodDeclarationsBlock(); :} /* Epsilon */
 			 		 	 ;
 
-InterfaceDecl ::= (InterfaceDeclDefinition) INTERFACE IDENT:I1 LCURLY InterfaceMethodDeclList:I2 RCURLY {: RESULT=new InterfaceDeclDefinition(I1, I2); RESULT.setLine(I1left); :};
+InterfaceDecl ::= (InterfaceDeclDefinition) INTERFACE IntrfaceName:I1 LCURLY InterfaceMethodDeclList:I2 RCURLY {: RESULT=new InterfaceDeclDefinition(I1, I2); RESULT.setLine(I1left); :};
+
+IntrfaceName ::= (InterfaceName) IDENT:name {: RESULT=new InterfaceName(name); RESULT.setLine(nameleft); :};
 
 InterfaceMethodDeclList ::= (InterfaceMethodDeclarations) InterfaceMethodDeclList:I1 InterfaceMethodDecl:I2 {: RESULT=new InterfaceMethodDeclarations(I1, I2); RESULT.setLine(I1left); :} |
 						    (NoInterfaceMethodDeclarations) {: RESULT=new NoInterfaceMethodDeclarations(); :} /* Epsilon */
 					 	    ;
 
-InterfaceMethodDecl ::= (TypeInterfaceMethodDeclaration) Type:T1 IDENT:I2 LPARENT FormParams:F3 SEMICOLON {: RESULT=new TypeInterfaceMethodDeclaration(T1, I2, F3); RESULT.setLine(T1left); :} |
-						(VoidInterfaceMethodDeclaration) VOID IDENT:I1 LPARENT FormParams:F2 SEMICOLON {: RESULT=new VoidInterfaceMethodDeclaration(I1, F2); RESULT.setLine(I1left); :}
-						;
+InterfaceMethodDecl ::= (InterfaceMethodDeclaration) InterfaceMethType:I1 InterfaceMethName:I2 LPARENT FormParams:F3 SEMICOLON {: RESULT=new InterfaceMethodDeclaration(I1, I2, F3); RESULT.setLine(I1left); :};
+						
+InterfaceMethType ::= (InterfaceMethodType) Type:T1 {: RESULT=new InterfaceMethodType(T1); RESULT.setLine(T1left); :} |
+					  (NoInterfaceMethodType) VOID {: RESULT=new NoInterfaceMethodType(); :}
+					  ;
+					  
+InterfaceMethName ::= (InterfaceMethodName) IDENT:name {: RESULT=new InterfaceMethodName(name); RESULT.setLine(nameleft); :};
 
 MethodDeclList ::= (MethodDeclarations) MethodDeclList:M1 MethodDecl:M2 {: RESULT=new MethodDeclarations(M1, M2); RESULT.setLine(M1left); :} |
 				   (NoMethodDeclarations) {: RESULT=new NoMethodDeclarations(); :} /* Epsilon */
@@ -238,11 +299,27 @@ ClassMethodDeclList ::= (ClassMethodDeclarations) ClassMethodDeclList:C1 ClassMe
 					    (NoClassMethodDeclarations) {: RESULT=new NoClassMethodDeclarations(); :} /* Epsilon */
 				 	    ;
 
-MethodDecl ::= (TypeMethodDeclaration) Type:T1 IDENT:I2 LPARENT FormParams:F3 VarDeclList:V4 LCURLY StatementList:S5 RCURLY {: RESULT=new TypeMethodDeclaration(T1, I2, F3, V4, S5); RESULT.setLine(T1left); :} |
-			   (VoidMethodDeclaration) VOID IDENT:I1 LPARENT FormParams:F2 VarDeclList:V3 LCURLY StatementList:S4 RCURLY {: RESULT=new VoidMethodDeclaration(I1, F2, V3, S4); RESULT.setLine(I1left); :}
-			   ;
+MethodDecl ::= (MethodDeclaration) MethType:M1 MethName:M2 LPARENT FormParams:F3 VarDeclList:V4 MethDeclEnd:M5 LCURLY StatementList:S6 RCURLY {: RESULT=new MethodDeclaration(M1, M2, F3, V4, M5, S6); RESULT.setLine(M1left); :};
+
+MethType ::= (MethodType) Type:T1 {: RESULT=new MethodType(T1); RESULT.setLine(T1left); :} |
+			 (NoMethodType) VOID {: RESULT=new NoMethodType(); :}
+			 ;
+			 
+MethName ::= (MethodName) IDENT:name {: RESULT=new MethodName(name); RESULT.setLine(nameleft); :};
+
+MethDeclEnd ::= (MethodDeclarationEnd) {: RESULT=new MethodDeclarationEnd(); :} /* Epsilon */;
 			   
-ClassMethodDecl ::= (ClassMethodDeclaration) ClassModifier:C1 MethodDecl:M2 {: RESULT=new ClassMethodDeclaration(C1, M2); RESULT.setLine(C1left); :};
+ClassMethodDecl ::= (ClassMethodDeclaration) ClassMethModifier:C1 ClassMethType:C2 ClassMethName:C3 LPARENT FormParams:F4 VarDeclList:V5 ClassMethDeclEnd:C6 LCURLY StatementList:S7 RCURLY {: RESULT=new ClassMethodDeclaration(C1, C2, C3, F4, V5, C6, S7); RESULT.setLine(C1left); :};
+
+ClassMethModifier ::= (ClassMethodModifier) Modifier:M1 {: RESULT=new ClassMethodModifier(M1); RESULT.setLine(M1left); :};
+
+ClassMethType ::= (ClassMethodType) Type:T1 {: RESULT=new ClassMethodType(T1); RESULT.setLine(T1left); :} |
+			 	  (NoClassMethodType) VOID {: RESULT=new NoClassMethodType(); :}
+			 	  ;
+			 
+ClassMethName ::= (ClassMethodName) IDENT:name {: RESULT=new ClassMethodName(name); RESULT.setLine(nameleft); :};
+
+ClassMethDeclEnd ::= (ClassMethodDeclarationEnd) {: RESULT=new ClassMethodDeclarationEnd(); :} /* Epsilon */;
 
 FormParams ::= (MethodFormalParameters) FormParamList:F1 {: RESULT=new MethodFormalParameters(F1); RESULT.setLine(F1left); :} |
 			   (NoMethodFormalParameters) RPARENT {: RESULT=new NoMethodFormalParameters(); :}
@@ -252,14 +329,14 @@ FormParamList ::= (FormalParameters) FormParam:F1 FormParamList:F2 {: RESULT=new
 				  (LastFormalParameter) LastFormParam:L1 {: RESULT=new LastFormalParameter(L1); RESULT.setLine(L1left); :}
 			   	  ;
 
-FormParam ::= (ArrayFormalParameter) Type:T1 IDENT:I2 LSQUARE RSQUARE COMMA {: RESULT=new ArrayFormalParameter(T1, I2); RESULT.setLine(T1left); :} |
-			  (FormalParameter) Type:T1 IDENT:I2 COMMA {: RESULT=new FormalParameter(T1, I2); RESULT.setLine(T1left); :} |
+FormParam ::= (ArrayFormalParameter) Type:T1 IDENT:name LSQUARE RSQUARE COMMA {: RESULT=new ArrayFormalParameter(T1, name); RESULT.setLine(T1left); :} |
+			  (FormalParameter) Type:T1 IDENT:name COMMA {: RESULT=new FormalParameter(T1, name); RESULT.setLine(T1left); :} |
 			  (FormalParameterCommaError) error COMMA:c
  	  	 	  {: parser.report_error("Syntax error recovery: Formal parameter[comma] (line: " + cleft + ")", null); :} {: RESULT=new FormalParameterCommaError(); :}
 			  ;
 			  
-LastFormParam ::= (LastArrayFormalParameter) Type:T1 IDENT:I2 LSQUARE RSQUARE RPARENT {: RESULT=new LastArrayFormalParameter(T1, I2); RESULT.setLine(T1left); :} |
-			  	  (LastSingleFormalParameter) Type:T1 IDENT:I2 RPARENT {: RESULT=new LastSingleFormalParameter(T1, I2); RESULT.setLine(T1left); :} |
+LastFormParam ::= (LastArrayFormalParameter) Type:T1 IDENT:name LSQUARE RSQUARE RPARENT {: RESULT=new LastArrayFormalParameter(T1, name); RESULT.setLine(T1left); :} |
+			  	  (LastSingleFormalParameter) Type:T1 IDENT:name RPARENT {: RESULT=new LastSingleFormalParameter(T1, name); RESULT.setLine(T1left); :} |
 			  	  (FormalParameterSemicolonError) error RPARENT:r
 		 		  {: parser.report_error("Syntax error recovery: Formal parameter[right parenthesis] (line: " + rleft + ")", null); :} {: RESULT=new FormalParameterSemicolonError(); :}
 			 	  ;
@@ -271,18 +348,22 @@ StatementList ::= (Statements) StatementList:S1 Statement:S2 {: RESULT=new State
 			   	  ;
 
 Statement ::= (DesignatorStatement) DesignatorStmt:D1 {: RESULT=new DesignatorStatement(D1); RESULT.setLine(D1left); :} |
-			  (IfStatement) IF LPARENT IfCond:I1 Statement:S2 {: RESULT=new IfStatement(I1, S2); RESULT.setLine(I1left); :} |
-			  (IfElseStatement) IF LPARENT IfCond:I1 Statement:S2 ELSE Statement:S3 {: RESULT=new IfElseStatement(I1, S2, S3); RESULT.setLine(I1left); :} |
-			  (ForStatement) FOR LPARENT ForDesignatorStmt:F1 ForCond:F2 SEMICOLON LastForDesignatorStmt:L3 Statement:S4 {: RESULT=new ForStatement(F1, F2, L3, S4); RESULT.setLine(F1left); :} |
+			  (IfStatement) IF LPARENT IfCond:I1 Statement:S2 IfStmtEnd:I3 {: RESULT=new IfStatement(I1, S2, I3); RESULT.setLine(I1left); :} |
+			  (IfElseStatement) IF LPARENT IfCond:I1 Statement:S2 IfStmtEnd:I3 ELSE Statement:S4 ElseStmtEnd:E5 {: RESULT=new IfElseStatement(I1, S2, I3, S4, E5); RESULT.setLine(I1left); :} |
+			  (ForStatement) FOR LPARENT ForDesignatorStmt:F1 ForCond:F2 SEMICOLON LastForDesignatorStmt:L3 ForDeclEnd:F4 Statement:S5 {: RESULT=new ForStatement(F1, F2, L3, F4, S5); RESULT.setLine(F1left); :} |
 			  (BreakStatement) BREAK SEMICOLON {: RESULT=new BreakStatement(); :} |
 			  (ContinueStatement) CONTINUE SEMICOLON {: RESULT=new ContinueStatement(); :} |
 			  (TypeReturnStatement) RETURN Expression:E1 SEMICOLON {: RESULT=new TypeReturnStatement(E1); RESULT.setLine(E1left); :} |
 			  (VoidReturnStatement) RETURN SEMICOLON {: RESULT=new VoidReturnStatement(); :} |
 			  (ReadStatement) READ LPARENT Designator:D1 RPARENT SEMICOLON {: RESULT=new ReadStatement(D1); RESULT.setLine(D1left); :} |
 			  (SimplePrintStatement) PRINT LPARENT Expression:E1 RPARENT SEMICOLON {: RESULT=new SimplePrintStatement(E1); RESULT.setLine(E1left); :} |
-			  (NumConstPrintStatement) PRINT LPARENT Expression:E1 COMMA NUM:N2 RPARENT SEMICOLON {: RESULT=new NumConstPrintStatement(E1, N2); RESULT.setLine(E1left); :} |
+			  (NumConstPrintStatement) PRINT LPARENT Expression:E1 COMMA NUM:value RPARENT SEMICOLON {: RESULT=new NumConstPrintStatement(E1, value); RESULT.setLine(E1left); :} |
 			  (BlockStatement) LCURLY StatementList:S1 RCURLY {: RESULT=new BlockStatement(S1); RESULT.setLine(S1left); :}
 			  ;
+			  
+IfStmtEnd ::= (IfStatementEnd) {: RESULT=new IfStatementEnd(); :} /* Epsilon */;
+
+ElseStmtEnd ::= (ElseStatementEnd) {: RESULT=new ElseStatementEnd(); :} /* Epsilon */;
 
 DesignatorStmt ::= (AssignDesignatorStatementWrapper) AssignDesignatorStmt:A1 {: RESULT=new AssignDesignatorStatementWrapper(A1); RESULT.setLine(A1left); :} |
 				   (FunctionDesignatorStatement) Designator:D1 LPARENT ActualParams:A2 RPARENT SEMICOLON {: RESULT=new FunctionDesignatorStatement(D1, A2); RESULT.setLine(D1left); :} |
@@ -310,14 +391,16 @@ LastForAssignDesignatorStmt ::= (LastForAssignDesignatorStatement) Designator:D1
 							 	(LastForAssignError) error RPARENT:r
 						 		{: parser.report_error("Syntax error recovery: Assignment[last in for] (line: " + rleft + ")", null); :} {: RESULT=new LastForAssignError(); :}
 							 	;
+							 	
+ForDeclEnd ::= (ForDeclarationEnd) {: RESULT=new ForDeclarationEnd(); :} /* Epsilon */;
 						
-ActualParams ::= (ActualParameters) ExpressionList:E1 {: RESULT=new ActualParameters(E1); RESULT.setLine(E1left); :} |
+ActualParams ::= (ActualParameters) ActualParamExprList:A1 {: RESULT=new ActualParameters(A1); RESULT.setLine(A1left); :} |
 			   	 (NoActualParameters) {: RESULT=new NoActualParameters(); :} /* Epsilon */
 			   	 ;
 			   	 
-ExpressionList ::= (Expressions) ExpressionList:E1 COMMA Expression:E2 {: RESULT=new Expressions(E1, E2); RESULT.setLine(E1left); :} |
-				   (FirstExpression) Expression:E1 {: RESULT=new FirstExpression(E1); RESULT.setLine(E1left); :}
-				   ;
+ActualParamExprList ::= (ActualParameterExpressions) ActualParamExprList:A1 COMMA Expression:E2 {: RESULT=new ActualParameterExpressions(A1, E2); RESULT.setLine(A1left); :} |
+				   		(FirstActualParameterExpression) Expression:E1 {: RESULT=new FirstActualParameterExpression(E1); RESULT.setLine(E1left); :}
+				   		;
 
 Condition ::= (ConditionTerms) Condition:C1 OR CondTerm:C2 {: RESULT=new ConditionTerms(C1, C2); RESULT.setLine(C1left); :} |
 			  (FirstConditionTerm) CondTerm:C1 {: RESULT=new FirstConditionTerm(C1); RESULT.setLine(C1left); :}
@@ -327,8 +410,8 @@ CondTerm ::= (ConditionFacts) CondTerm:C1 AND CondFact:C2 {: RESULT=new Conditio
 			 (FirstConditionFact) CondFact:C1 {: RESULT=new FirstConditionFact(C1); RESULT.setLine(C1left); :}
 			 ;
 			 
-CondFact ::= (ConditionExpressions) CondFact:C1 RelOp:R2 Expression:E3 {: RESULT=new ConditionExpressions(C1, R2, E3); RESULT.setLine(C1left); :} |
-			 (FirstConditionExpression) Expression:E1 {: RESULT=new FirstConditionExpression(E1); RESULT.setLine(E1left); :}
+CondFact ::= (ConditionExpressions) Expression:E1 RelOp:R2 Expression:E3 {: RESULT=new ConditionExpressions(E1, R2, E3); RESULT.setLine(E1left); :} |
+			 (SimpleConditionExpression) Expression:E1 {: RESULT=new SimpleConditionExpression(E1); RESULT.setLine(E1left); :}
 			 ;
 
 IfCond ::= (IfCondition) Condition:C1 RPARENT {: RESULT=new IfCondition(C1); RESULT.setLine(C1left); :} |
@@ -351,22 +434,28 @@ Term ::= (Factors) Term:T1 MulOp:M2 Factor:F3 {: RESULT=new Factors(T1, M2, F3);
 		 
 Factor ::= (FunctionFactor) Designator:D1 LPARENT ActualParams:A2 RPARENT {: RESULT=new FunctionFactor(D1, A2); RESULT.setLine(D1left); :} |
 		   (DesignatorFactor) Designator:D1 {: RESULT=new DesignatorFactor(D1); RESULT.setLine(D1left); :} |
-		   (NumFactor) NUM:N1 {: RESULT=new NumFactor(N1); RESULT.setLine(N1left); :} |
-		   (CharFactor) CHAR:C1 {: RESULT=new CharFactor(C1); RESULT.setLine(C1left); :} |
-		   (BoolFactor) BOOL:B1 {: RESULT=new BoolFactor(B1); RESULT.setLine(B1left); :} |
+		   (NumFactor) NUM:value {: RESULT=new NumFactor(value); RESULT.setLine(valueleft); :} |
+		   (CharFactor) CHAR:value {: RESULT=new CharFactor(value); RESULT.setLine(valueleft); :} |
+		   (BoolFactor) BOOL:value {: RESULT=new BoolFactor(value); RESULT.setLine(valueleft); :} |
 		   (NewArrayFactor) NEW Type:T1 LSQUARE Expression:E2 RSQUARE {: RESULT=new NewArrayFactor(T1, E2); RESULT.setLine(T1left); :} |
-		   (NewInitializedArrayFactor) NEW Type:T1 LSQUARE Expression:E2 RSQUARE LCURLY InitList:I3 RCURLY {: RESULT=new NewInitializedArrayFactor(T1, E2, I3); RESULT.setLine(T1left); :} |
+		   (NewInitializedArrayFactor) NEW Type:T1 LSQUARE Expression:E2 RSQUARE NewInitArrExprEnd:N3 LCURLY InitList:I4 RCURLY {: RESULT=new NewInitializedArrayFactor(T1, E2, N3, I4); RESULT.setLine(T1left); :} |
 		   (NewFactor) NEW Type:T1 {: RESULT=new NewFactor(T1); RESULT.setLine(T1left); :} |
 		   (ExpressionFactor) LPARENT Expression:E1 RPARENT {: RESULT=new ExpressionFactor(E1); RESULT.setLine(E1left); :}
 		   ;
 		   
-InitList ::= (InitializationList) ExpressionList:E1 {: RESULT=new InitializationList(E1); RESULT.setLine(E1left); :} |
+NewInitArrExprEnd ::= (NewInitializedArrayExpressionEnd) {: RESULT=new NewInitializedArrayExpressionEnd(); :} /* Epsilon */;
+		   
+InitList ::= (InitializationList) InitExprList:I1 {: RESULT=new InitializationList(I1); RESULT.setLine(I1left); :} |
 			 (EmptyInitializationList) {: RESULT=new EmptyInitializationList(); :} /* Epsilon */
 			 ;
+			 
+InitExprList ::= (InitializationExpressions) InitExprList:I1 COMMA Expression:E2 {: RESULT=new InitializationExpressions(I1, E2); RESULT.setLine(I1left); :} |
+		   		 (FirstInitializationExpression) Expression:E1 {: RESULT=new FirstInitializationExpression(E1); RESULT.setLine(E1left); :}
+		   		 ;
 
-Designator ::= (FieldDesignator) Designator:D1 PERIOD IDENT:I2 {: RESULT=new FieldDesignator(D1, I2); RESULT.setLine(D1left); :} |
+Designator ::= (FieldDesignator) Designator:D1 PERIOD IDENT:field {: RESULT=new FieldDesignator(D1, field); RESULT.setLine(D1left); :} |
 			   (ArrayDesignator) Designator:D1 LSQUARE Expression:E2 RSQUARE {: RESULT=new ArrayDesignator(D1, E2); RESULT.setLine(D1left); :} |
-			   (SimpleDesignator) IDENT:I1 {: RESULT=new SimpleDesignator(I1); RESULT.setLine(I1left); :}
+			   (SimpleDesignator) IDENT:name {: RESULT=new SimpleDesignator(name); RESULT.setLine(nameleft); :}
 			   ;
 
 AssignOp ::= (Assign) ASSIGN {: RESULT=new Assign(); :};
@@ -380,7 +469,8 @@ RelOp ::= (Equal) EQU {: RESULT=new Equal(); :} |
 		  ;
 
 AddOp ::= (Addition) ADD {: RESULT=new Addition(); :} | 
-		  (Subtraction) SUB {: RESULT=new Subtraction(); :};
+		  (Subtraction) SUB {: RESULT=new Subtraction(); :}
+		  ;
 
 MulOp ::= (Multiplication) MUL {: RESULT=new Multiplication(); :} | 
 		  (Division) DIV {: RESULT=new Division(); :} | 

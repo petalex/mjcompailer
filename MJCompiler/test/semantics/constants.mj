@@ -1,0 +1,36 @@
+program Semantics
+	//		Int consts
+	const int a = 1, b = 2;
+	// Not defined type
+	const intt c = 3;
+	// Not Type type
+	const a e = 4;
+	// Type-value mismatch
+	const char f = 3;
+	
+	//		Char consts
+	const char aa = 'a', bb = 'b';
+	// Not defined type
+	const charr cc = 'c';
+	// Not Type type
+	const a ee = 'e';
+	// Type-value mismatch
+	const int ff = 'f';
+	
+	//		bool consts
+	const bool aaa = true, bbb = false;
+	// Not defined type
+	const booll ccc = false;
+	// Not Type type
+	const a eee = true;
+	// Type-value mismatch
+	const int fff = false;
+	
+	//		Enum consts
+	enum E { A, B = 5, C, D = 1 }
+	// Already defined consts
+	enum E { A }
+	enum E1 { A, B, A }
+{
+
+}

@@ -1,0 +1,52 @@
+program Semantics
+	interface I1 {
+		int f(int x, int y);
+	}
+	
+	interface I2 {
+		int f(int x, int y);
+	}
+	
+	class C1 {
+		protected int a;
+		{
+			protected void foo(int x) {}
+		}
+	}
+	
+	// Errors: Some interface methods are undefined
+	class C2 extends C1 implements I1 {
+		{
+			private void m() {}
+			// Redefined method
+			public void foo(int x1) {}
+		}
+	}
+	
+	class C3 extends C1 implements I1 {
+		{
+			public void f() {}
+			// Error: Method redefinition
+			protected void foo(char x) {}
+		}
+	}
+	
+	class C4 extends C1 implements I1 {
+		{
+			public void f() {}
+			// Error: Method redefinition
+			protected int foo(int x) {}
+		}
+	}
+	
+	// Correct
+	class C5 extends C1 implements I1 {
+		{
+			public int f(int a, int b) {}
+			// Error: Method redefinition
+			private void foo(int x) { }
+		}
+	}
+{
+	void main() {}
+}

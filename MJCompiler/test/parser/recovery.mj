@@ -7,17 +7,10 @@ program P
 	//int 5x, y;
 	
 	class A1 extends B1 implements C1 { }
-	
-	// Inner class fields recovery
-	// TO-DO
-	
 	class A2 extends B2 { }
 	
 	// Extending class recovery
-	class A extnds B1 implements C1 { }
-	
-	class A3 implements C3, D3 { }
-	
+	class A extends 5B1 implements C1 { }
 	class X extends 5Y { }
 	
 	// Class field recovery
@@ -25,6 +18,8 @@ program P
 		private int a, b;
 		protected char c d;
 		public X e f, g;
+		{
+		}
 	}
 	
 	int a[];

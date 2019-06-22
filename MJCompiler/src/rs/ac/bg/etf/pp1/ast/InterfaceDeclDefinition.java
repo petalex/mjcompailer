@@ -1,27 +1,28 @@
 // generated with ast extension for cup
 // version 0.8
-// 11/5/2019 2:45:35
+// 22/5/2019 0:9:6
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class InterfaceDeclDefinition extends InterfaceDecl {
 
-    private String I1;
+    private IntrfaceName IntrfaceName;
     private InterfaceMethodDeclList InterfaceMethodDeclList;
 
-    public InterfaceDeclDefinition (String I1, InterfaceMethodDeclList InterfaceMethodDeclList) {
-        this.I1=I1;
+    public InterfaceDeclDefinition (IntrfaceName IntrfaceName, InterfaceMethodDeclList InterfaceMethodDeclList) {
+        this.IntrfaceName=IntrfaceName;
+        if(IntrfaceName!=null) IntrfaceName.setParent(this);
         this.InterfaceMethodDeclList=InterfaceMethodDeclList;
         if(InterfaceMethodDeclList!=null) InterfaceMethodDeclList.setParent(this);
     }
 
-    public String getI1() {
-        return I1;
+    public IntrfaceName getIntrfaceName() {
+        return IntrfaceName;
     }
 
-    public void setI1(String I1) {
-        this.I1=I1;
+    public void setIntrfaceName(IntrfaceName IntrfaceName) {
+        this.IntrfaceName=IntrfaceName;
     }
 
     public InterfaceMethodDeclList getInterfaceMethodDeclList() {
@@ -37,15 +38,18 @@ public class InterfaceDeclDefinition extends InterfaceDecl {
     }
 
     public void childrenAccept(Visitor visitor) {
+        if(IntrfaceName!=null) IntrfaceName.accept(visitor);
         if(InterfaceMethodDeclList!=null) InterfaceMethodDeclList.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
+        if(IntrfaceName!=null) IntrfaceName.traverseTopDown(visitor);
         if(InterfaceMethodDeclList!=null) InterfaceMethodDeclList.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
+        if(IntrfaceName!=null) IntrfaceName.traverseBottomUp(visitor);
         if(InterfaceMethodDeclList!=null) InterfaceMethodDeclList.traverseBottomUp(visitor);
         accept(visitor);
     }
@@ -55,7 +59,10 @@ public class InterfaceDeclDefinition extends InterfaceDecl {
         buffer.append(tab);
         buffer.append("InterfaceDeclDefinition(\n");
 
-        buffer.append(" "+tab+I1);
+        if(IntrfaceName!=null)
+            buffer.append(IntrfaceName.toString("  "+tab));
+        else
+            buffer.append(tab+"  null");
         buffer.append("\n");
 
         if(InterfaceMethodDeclList!=null)

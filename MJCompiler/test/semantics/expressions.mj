@@ -1,0 +1,23 @@
+program Semantics
+{
+	int f(int x)
+	{
+		return x + 1;
+	}
+	void main()
+		int a[], x;
+		bool t;
+	{
+		//		Expressions
+		x = 1;
+		//a = new int[5]{ 1, 2 + 3 * x, a[0], f(1), a[f(0)] };
+		x = 2;
+		
+		//		Errors
+		a = new int[2]{ 1, f(x[0]) };
+		a = new int[t]{ 1 };
+		a = new int[x + 1]{ 1 };
+		a = new int[3]{ f(t), f(x, x, t), f(), f(f(1)) };
+		a = new int[2]{ 1, t };
+	}
+}

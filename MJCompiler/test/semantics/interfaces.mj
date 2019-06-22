@@ -1,0 +1,31 @@
+program Semantics
+	interface I1 {
+		int f(int x, int y);
+	}
+	
+	interface I2 {
+		int f(int x1, int y1);
+	}
+	
+	interface I3 {
+		int f(int a, char b);
+	}
+	
+	class C1 implements I1, I2 {
+		{
+			public int f(int a, int b) {
+				return a + b;
+			}
+		}
+	}
+	
+	// Error: Not all interface methods defined 
+	// + interface methods declarations differ
+	class C2 implements I2, I3 {
+		{
+			
+		}
+	}
+{
+	void main() {}
+}

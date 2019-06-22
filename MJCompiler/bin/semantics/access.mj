@@ -1,0 +1,72 @@
+program Semantics
+	
+	class A {
+		private int a1;
+		protected int a2;
+		{
+			private void a3(int x) {
+				this.a1 = 0;
+				a2 = 0;
+			}
+			
+			public void a4() {}
+		}
+	}
+	
+	class B extends A {
+		private int b1;
+		private int b2;
+		private A a;
+		public A aa;
+		{
+			protected void b3() {
+				this.a1 = 0; // Error
+				a2 = 0;
+				this.a3(0); // Error
+				a4();
+				
+				this.b1 = 0;
+				b2 = 0;
+				
+				a.a1 = 0; // Error
+				a.a2 = 0; // Error
+				a.a3(0); // Error
+				a.a4();
+			}
+			public void b4(int x) {}
+		}
+	}
+	
+	A a;
+	B b;
+{
+	void f(int x) {}
+	
+	void main() {
+		a.a1 = 0; // Error
+		a.a2 = 0; // Error
+		a.a3(0); // Error
+		a.a4();
+		
+		b.a1 = 0; // Error
+		b.a2 = 0; // Error
+		b.a3(0); // Error
+		
+		b.b1 = 0; // Error
+		b.b2 = 0; // Error
+		b.a.a4(); // Error
+		b.aa.a3(); // Error
+		b.aa.a4();
+		b.b3(); // Error
+		b.b4(1);
+		
+		b.b4('a');
+		b.b4();
+		b.b4(1, 2);
+		
+		f(1);
+		f('a');
+		f();
+		f(1, 2);
+	}
+}

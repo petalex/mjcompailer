@@ -1,0 +1,31 @@
+program Semantics
+	//		Global vars
+	int var1[], var2;
+	char var3, var4[];
+	bool var5, var6[];
+	
+	enum E { C1, C2 = 5, C3}
+	enum E1 { C1, C2 = 5, C3}
+	
+	E var7, var8[];
+	
+	// Duplicate symbols
+	int var1[], var22;
+	int var11[], var2;
+	
+	char var33, var4[];
+	char var3, var44[];
+	
+	bool var55, var6[];
+	bool var5, var66[];
+	
+	E var77, var8[];
+	E var7, var88[];
+{
+	void main() {
+		var7 = 1;
+		var7 = E1.C1;
+		var7 = E.C1 + 1;
+		var2 = E.C1;
+	}
+}

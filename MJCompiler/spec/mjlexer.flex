@@ -54,7 +54,7 @@ import java_cup.runtime.Symbol;
 "protected"						{ return createSymbol(sym.PROTECTED, yytext()); }
 "private"						{ return createSymbol(sym.PRIVATE, yytext()); }
 
-("true"|"false")				{ return createSymbol(sym.BOOL, yytext()); }
+("true"|"false")				{ return createSymbol(sym.BOOL, Boolean.valueOf(yytext())); }
 ([a-z]|[A-Z])[a-z|A-Z|0-9|_]*	{ return createSymbol(sym.IDENT, yytext()); }
 [0-9]+							{ return createSymbol(sym.NUM, new Integer(yytext())); }
 "'"[ -~]"'"						{ return createSymbol(sym.CHAR, yytext().charAt(1)); }

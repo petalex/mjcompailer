@@ -1,0 +1,66 @@
+program Semantics
+	//		Interfaces
+	interface Math {
+		int add(int x, int y);
+		int sub(int x, int y);
+	}
+	
+	class C {
+		protected int a;
+		{
+			public void f(int x) {}
+		}
+	}
+	
+	class Dummy extends C {
+		private int a, b;
+		protected char c;
+		{
+			private void m() {}
+		}
+	}
+	
+	class MathImpl extends Dummy implements Math {
+		private int count;
+		{
+			public void init() {
+				count = 0;
+			}
+			
+			public int add(int a, int b) 
+				int c;
+			{
+				c = a + b;
+				return c;
+			}
+			
+			public int sub(int a, int b) 
+				int c;
+			{
+				c = a - b;
+				return c;
+			}
+		}
+	}
+	
+	// Errors
+	class E extends Math implements C, Math, Math {}
+	
+	Math m;
+	MathImpl i;
+{
+	void main() {
+		m = i;
+		
+		// Error
+		i = m;
+		
+		m.init();
+		m.f(0);
+		
+		// Errors
+		m.count = 0;
+		m.a = 1;
+		m.c = 'a';
+	}
+}

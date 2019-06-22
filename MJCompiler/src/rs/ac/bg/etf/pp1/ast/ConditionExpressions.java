@@ -1,39 +1,23 @@
 // generated with ast extension for cup
 // version 0.8
-// 11/5/2019 2:45:35
+// 22/5/2019 0:9:7
 
 
 package rs.ac.bg.etf.pp1.ast;
 
 public class ConditionExpressions extends CondFact {
 
-    private CondFact CondFact;
-    private RelOp RelOp;
     private Expression Expression;
+    private RelOp RelOp;
+    private Expression Expression1;
 
-    public ConditionExpressions (CondFact CondFact, RelOp RelOp, Expression Expression) {
-        this.CondFact=CondFact;
-        if(CondFact!=null) CondFact.setParent(this);
-        this.RelOp=RelOp;
-        if(RelOp!=null) RelOp.setParent(this);
+    public ConditionExpressions (Expression Expression, RelOp RelOp, Expression Expression1) {
         this.Expression=Expression;
         if(Expression!=null) Expression.setParent(this);
-    }
-
-    public CondFact getCondFact() {
-        return CondFact;
-    }
-
-    public void setCondFact(CondFact CondFact) {
-        this.CondFact=CondFact;
-    }
-
-    public RelOp getRelOp() {
-        return RelOp;
-    }
-
-    public void setRelOp(RelOp RelOp) {
         this.RelOp=RelOp;
+        if(RelOp!=null) RelOp.setParent(this);
+        this.Expression1=Expression1;
+        if(Expression1!=null) Expression1.setParent(this);
     }
 
     public Expression getExpression() {
@@ -44,27 +28,43 @@ public class ConditionExpressions extends CondFact {
         this.Expression=Expression;
     }
 
+    public RelOp getRelOp() {
+        return RelOp;
+    }
+
+    public void setRelOp(RelOp RelOp) {
+        this.RelOp=RelOp;
+    }
+
+    public Expression getExpression1() {
+        return Expression1;
+    }
+
+    public void setExpression1(Expression Expression1) {
+        this.Expression1=Expression1;
+    }
+
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 
     public void childrenAccept(Visitor visitor) {
-        if(CondFact!=null) CondFact.accept(visitor);
-        if(RelOp!=null) RelOp.accept(visitor);
         if(Expression!=null) Expression.accept(visitor);
+        if(RelOp!=null) RelOp.accept(visitor);
+        if(Expression1!=null) Expression1.accept(visitor);
     }
 
     public void traverseTopDown(Visitor visitor) {
         accept(visitor);
-        if(CondFact!=null) CondFact.traverseTopDown(visitor);
-        if(RelOp!=null) RelOp.traverseTopDown(visitor);
         if(Expression!=null) Expression.traverseTopDown(visitor);
+        if(RelOp!=null) RelOp.traverseTopDown(visitor);
+        if(Expression1!=null) Expression1.traverseTopDown(visitor);
     }
 
     public void traverseBottomUp(Visitor visitor) {
-        if(CondFact!=null) CondFact.traverseBottomUp(visitor);
-        if(RelOp!=null) RelOp.traverseBottomUp(visitor);
         if(Expression!=null) Expression.traverseBottomUp(visitor);
+        if(RelOp!=null) RelOp.traverseBottomUp(visitor);
+        if(Expression1!=null) Expression1.traverseBottomUp(visitor);
         accept(visitor);
     }
 
@@ -73,8 +73,8 @@ public class ConditionExpressions extends CondFact {
         buffer.append(tab);
         buffer.append("ConditionExpressions(\n");
 
-        if(CondFact!=null)
-            buffer.append(CondFact.toString("  "+tab));
+        if(Expression!=null)
+            buffer.append(Expression.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");
@@ -85,8 +85,8 @@ public class ConditionExpressions extends CondFact {
             buffer.append(tab+"  null");
         buffer.append("\n");
 
-        if(Expression!=null)
-            buffer.append(Expression.toString("  "+tab));
+        if(Expression1!=null)
+            buffer.append(Expression1.toString("  "+tab));
         else
             buffer.append(tab+"  null");
         buffer.append("\n");
